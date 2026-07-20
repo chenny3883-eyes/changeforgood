@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(which node; which npm; ls \"/Users/cfg/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/2ffa7be9-2aa3-40f1-bab2-a9eb185938ea/cb4af8be-02e2-4ac0-86d0-00e62a6d9a4f/skills/docx/node_modules/docx\" 2>/dev/null && echo \"docx exists\" || echo \"docx not found\")",
+      "Bash(find /usr /opt /home -name \"node\" -type f 2>/dev/null | head -5; find /Users/cfg -name \"node\" -type f 2>/dev/null | head -5)"
+    ]
+  }
+}

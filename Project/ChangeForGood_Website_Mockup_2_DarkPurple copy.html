@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Change For Good Consulting — Dark Purple Theme</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cfg-purple: #2D2380;
+    --cfg-purple-deep: #1a1560;
+    --cfg-purple-mid: #534AB7;
+    --cfg-purple-light: rgba(255,255,255,0.07);
+    --cfg-gold: #D4A017;
+    --cfg-gold-light: rgba(212,160,23,0.15);
+    --cfg-gold-bright: #D4A017;
+    --cfg-gold-hover: #F5C842;
+    --surface-0: #1a1560;
+    --surface-1: #2D2380;
+    --surface-2: #342a96;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255,255,255,0.80);
+    --text-muted: rgba(255,255,255,0.50);
+    --border: rgba(255,255,255,0.10);
+    --border-strong: rgba(255,255,255,0.20);
+    --radius: 8px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--surface-0);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .site-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 14px;
+    border: 0.5px solid var(--border);
+    overflow: hidden;
+    background: var(--surface-1);
+  }
+
+  /* NAV */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: var(--cfg-purple-deep);
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-logo { display: flex; flex-direction: column; }
+  .nav-logo-main { font-size: 14px; font-weight: 600; color: #fff; letter-spacing: .03em; }
+  .nav-logo-main span { color: var(--cfg-gold-bright); }
+  .nav-logo-sub { font-size: 10px; color: rgba(255,255,255,.45); letter-spacing: .04em; margin-top: 2px; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-btn {
+    padding: 6px 11px;
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    background: none;
+    color: rgba(255,255,255,0.65);
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: all .12s;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-btn:hover { background: rgba(212,160,23,.12); color: var(--cfg-gold-hover); }
+  .nav-btn.active { background: rgba(212,160,23,.18); color: var(--cfg-gold-hover); border-bottom: 2px solid var(--cfg-gold-bright); }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero { padding: 32px 28px 26px; border-bottom: 0.5px solid var(--border); background: var(--surface-1); }
+  .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--cfg-gold); margin: 0 0 10px; }
+  .hero h1 { font-size: 24px; font-weight: 600; line-height: 1.3; margin: 0 0 12px; color: #ffffff; }
+  .hero p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin: 0 0 18px; max-width: 520px; }
+  .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* BUTTONS */
+  .btn-primary { padding: 10px 22px; font-size: 13px; font-weight: 600; background: var(--cfg-gold-bright); color: #1a1560; border: none; border-radius: var(--radius); cursor: pointer; transition: opacity .12s; }
+  .btn-primary:hover { opacity: .88; }
+  .btn-gold { padding: 10px 22px; font-size: 13px; font-weight: 600; background: var(--cfg-gold-bright); color: #1a1560; border: none; border-radius: var(--radius); cursor: pointer; transition: opacity .12s; }
+  .btn-gold:hover { opacity: .88; }
+  .btn-outline { padding: 10px 22px; font-size: 13px; background: none; border: 1px solid rgba(255,255,255,0.30); color: rgba(255,255,255,0.80); border-radius: var(--radius); cursor: pointer; }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); }
+  .btn-sm { padding: 7px 16px; font-size: 12px; }
+
+  /* SECTIONS */
+  .section { padding: 22px 28px; border-bottom: 0.5px solid var(--border); background: var(--surface-1); }
+  .section:last-child { border-bottom: none; }
+  .section-alt { background: rgba(255,255,255,0.04); }
+  .slabel { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--cfg-gold); margin: 0 0 14px; }
+
+  /* PHOTO PLACEHOLDER */
+  .photo-ph {
+    width: 100%; height: 90px;
+    background: rgba(255,255,255,0.05);
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--text-muted);
+    border: 1px dashed rgba(255,255,255,0.20);
+    margin-bottom: 16px;
+  }
+
+  /* GRIDS */
+  .g3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+  .g2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+  @media (max-width: 600px) { .g3 { grid-template-columns: 1fr; } .g2 { grid-template-columns: 1fr; } }
+
+  /* CARDS */
+  .card { background: rgba(255,255,255,0.06); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px; }
+  .card h4 { font-size: 13px; font-weight: 600; color: var(--cfg-gold); margin: 0 0 5px; }
+  .card p { font-size: 12px; color: var(--text-secondary); margin: 0; line-height: 1.55; }
+  .card-icon { font-size: 20px; color: var(--cfg-gold); margin-bottom: 8px; display: block; }
+
+  /* PROOF STRIP */
+  .proof-strip { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 14px 28px; background: rgba(0,0,0,0.15); border-bottom: 0.5px solid var(--border); }
+  .proof-logo { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.55); padding: 4px 10px; border: 0.5px solid rgba(255,255,255,0.18); border-radius: var(--radius); }
+
+  /* QUOTE */
+  .quote-block { border-left: 3px solid var(--cfg-gold-bright); border-radius: 0 8px 8px 0; padding: 14px 16px; background: rgba(212,160,23,0.10); font-size: 14px; font-style: italic; color: rgba(255,255,255,0.90); line-height: 1.7; }
+  .quote-attr { font-size: 11px; color: var(--cfg-gold); margin-top: 8px; font-style: normal; font-weight: 600; }
+
+  /* STATS */
+  .stat-row { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+  .stat-box { background: rgba(255,255,255,0.06); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+  .stat-num { font-size: 26px; font-weight: 600; color: var(--cfg-gold); }
+  .stat-lbl { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+
+  /* STEPS */
+  .step-row { display: flex; align-items: flex-start; }
+  .step-item { flex: 1; text-align: center; padding: 0 8px; }
+  .step-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(212,160,23,0.20); color: var(--cfg-gold); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
+  .step-title { font-size: 12px; font-weight: 600; color: #fff; margin: 0 0 3px; }
+  .step-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
+
+  /* TAGS */
+  .tag-purple { display: inline-block; font-size: 10px; padding: 2px 9px; border-radius: 20px; background: rgba(83,74,183,0.35); color: rgba(255,255,255,0.85); font-weight: 600; }
+  .tag-gold { display: inline-block; font-size: 10px; padding: 2px 9px; border-radius: 20px; background: rgba(212,160,23,0.20); color: var(--cfg-gold); font-weight: 600; }
+
+  /* CREDENTIALS */
+  .cred-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
+  .cred-item:last-child { border-bottom: none; }
+  .cred-icon { font-size: 18px; color: var(--cfg-gold); flex-shrink: 0; margin-top: 1px; }
+  .cred-title { font-size: 13px; font-weight: 600; color: #fff; }
+  .cred-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* VALUES */
+  .val-item { display: flex; gap: 12px; align-items: flex-start; padding: 11px 0; border-bottom: 0.5px solid var(--border); }
+  .val-item:last-child { border-bottom: none; }
+  .val-title { font-size: 13px; font-weight: 600; color: var(--cfg-gold); margin-bottom: 3px; }
+  .val-body { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+
+  /* SERVICE CARDS */
+  .svc-card { background: rgba(255,255,255,0.06); border: 0.5px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+  .svc-card.featured { border: 2px solid var(--cfg-gold-bright); }
+  .svc-title { font-size: 15px; font-weight: 600; color: #fff; margin: 8px 0 5px; }
+  .svc-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin: 0 0 10px; }
+  .svc-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
+
+  /* TESTIMONIALS */
+  .testimonial { display: flex; gap: 12px; align-items: flex-start; }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(212,160,23,0.20); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--cfg-gold); flex-shrink: 0; }
+  .testi-quote { font-size: 13px; font-style: italic; color: var(--text-secondary); line-height: 1.65; }
+  .testi-attr { font-size: 11px; color: var(--cfg-gold); margin-top: 6px; font-weight: 600; }
+
+  /* ARTICLE CARDS */
+  .art-card { background: rgba(255,255,255,0.06); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .art-img { height: 52px; background: rgba(0,0,0,0.20); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted); }
+  .art-body { padding: 12px; }
+  .art-title { font-size: 12px; font-weight: 600; color: #fff; line-height: 1.4; margin: 6px 0 4px; }
+  .art-meta { font-size: 11px; color: var(--text-muted); }
+
+  /* RESULT CARDS */
+  .result-card { background: rgba(255,255,255,0.06); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+  .gold-bar { height: 3px; background: var(--cfg-gold-bright); border-radius: 2px; margin-bottom: 12px; }
+  .result-client { font-size: 13px; font-weight: 600; color: #fff; }
+  .result-body { font-size: 12px; color: var(--text-secondary); margin: 0; line-height: 1.65; }
+
+  /* FORM */
+  .form-field { margin-bottom: 12px; }
+  .form-field label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; font-weight: 500; }
+  .form-field input, .form-field textarea, .form-field select {
+    width: 100%; font-size: 13px; padding: 8px 10px;
+    border: 0.5px solid var(--border-strong); border-radius: var(--radius);
+    background: rgba(255,255,255,0.08); color: #fff;
+    font-family: inherit; outline: none;
+  }
+  .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(255,255,255,0.35); }
+  .form-field select option { background: #2D2380; color: #fff; }
+  .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--cfg-gold); }
+  .form-field textarea { height: 80px; resize: vertical; }
+
+  /* TRUST NOTE */
+  .trust-note { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); margin-top: 10px; }
+
+  /* CONTACT INFO */
+  .contact-info-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); padding: 5px 0; }
+  .contact-info-icon { font-size: 15px; color: var(--cfg-gold); width: 20px; flex-shrink: 0; }
+
+  /* DOWNLOAD BANNER */
+  .download-banner { background: rgba(212,160,23,0.10); border: 2px solid var(--cfg-gold-bright); border-radius: 10px; padding: 16px; display: flex; gap: 16px; align-items: center; margin-bottom: 12px; }
+  .dl-icon { font-size: 32px; color: var(--cfg-gold); flex-shrink: 0; }
+
+  /* NEWSLETTER */
+  .newsletter-row { display: flex; gap: 10px; margin-top: 10px; }
+  .newsletter-row input { flex: 1; font-size: 13px; padding: 8px 10px; border: 0.5px solid var(--border-strong); border-radius: var(--radius); background: rgba(255,255,255,0.08); color: #fff; font-family: inherit; outline: none; }
+  .newsletter-row input::placeholder { color: rgba(255,255,255,0.35); }
+
+  /* FOOTER */
+  .footer-strip { background: rgba(0,0,0,0.25); padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-top: 0.5px solid var(--border); }
+  .footer-strip .foot-left { font-size: 11px; color: rgba(255,255,255,.45); }
+  .footer-strip .foot-right { font-size: 11px; color: var(--cfg-gold-bright); font-weight: 600; }
+
+  /* INLINE FLEX HELPERS */
+  .flex-between { display: flex; justify-content: space-between; align-items: flex-start; }
+  .flex-gap { display: flex; gap: 10px; }
+  .mt6 { margin-top: 6px; }
+  .mt10 { margin-top: 10px; }
+  .mt12 { margin-top: 12px; }
+  .mb10 { margin-bottom: 10px; }
+  .mb12 { margin-bottom: 12px; }
+  .w100 { width: 100%; }
+
+  .ico { display: inline-block; width: 18px; text-align: center; }
+
+  /* ── DIAGNOSTIC PAGE ── */
+  .diag-wrap { max-width: 700px; margin: 0 auto; padding: 40px 20px 80px; }
+  .diag-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cfg-gold); border: 0.5px solid rgba(212,160,23,0.35); border-radius: 20px; padding: 4px 12px; margin-bottom: 16px; }
+  .diag-h1 { font-size: clamp(22px,4.5vw,32px); font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 14px; }
+  .diag-h1 em { color: var(--cfg-gold); font-style: normal; }
+  .diag-lead { font-size: 14px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 12px; }
+  .diag-how { background: rgba(255,255,255,0.05); border: 0.5px solid var(--border); border-radius: 10px; padding: 18px 20px; margin: 20px 0 28px; }
+  .diag-how-title { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cfg-gold); margin-bottom: 12px; }
+  .diag-steps { display: flex; gap: 10px; flex-wrap: wrap; }
+  .diag-step { flex: 1; min-width: 110px; }
+  .diag-step-num { font-size: 22px; font-weight: 800; color: var(--cfg-gold); line-height: 1; margin-bottom: 4px; }
+  .diag-step p { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+
+  /* progress */
+  .diag-prog-wrap { margin-bottom: 28px; }
+  .diag-prog-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 7px; }
+  .diag-prog-track { height: 3px; background: var(--border); border-radius: 10px; overflow: hidden; }
+  .diag-prog-fill { height: 100%; background: var(--cfg-gold); border-radius: 10px; transition: width .4s ease; }
+
+  /* question card */
+  .diag-area-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .diag-area-icon { width: 32px; height: 32px; border-radius: 50%; background: rgba(212,160,23,0.12); border: 0.5px solid rgba(212,160,23,0.3); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .diag-area-name { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cfg-gold); }
+  .diag-area-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .diag-qcard { background: rgba(255,255,255,0.06); border: 0.5px solid var(--border); border-radius: 10px; padding: 22px 20px 18px; }
+  .diag-qnum { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; }
+  .diag-qtext { font-size: 15px; font-weight: 500; color: #fff; line-height: 1.55; margin-bottom: 18px; }
+  .diag-scale { display: flex; flex-direction: column; gap: 7px; }
+  .diag-opt { display: flex; align-items: center; gap: 12px; padding: 9px 13px; border: 0.5px solid var(--border); border-radius: 8px; cursor: pointer; transition: all .15s; user-select: none; }
+  .diag-opt:hover { border-color: var(--cfg-gold); background: rgba(212,160,23,0.10); }
+  .diag-opt.sel { border-color: var(--cfg-gold); background: rgba(212,160,23,0.12); }
+  .diag-opt.sel .diag-onum { background: var(--cfg-gold); color: var(--cfg-purple-deep); }
+  .diag-onum { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--text-muted); flex-shrink: 0; transition: all .15s; }
+  .diag-olabel { font-size: 13px; color: var(--text-secondary); }
+  .diag-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; gap: 10px; flex-wrap: wrap; }
+  .diag-back { background: none; border: 0.5px solid rgba(255,255,255,0.2); color: var(--text-muted); font-size: 13px; padding: 9px 18px; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .diag-back:hover { background: rgba(255,255,255,0.06); }
+  .diag-next { background: var(--cfg-gold); color: var(--cfg-purple-deep); font-size: 13px; font-weight: 700; padding: 10px 22px; border-radius: 8px; border: none; cursor: pointer; opacity: .38; pointer-events: none; transition: opacity .2s; font-family: inherit; }
+  .diag-next.on { opacity: 1; pointer-events: auto; }
+  .diag-next.on:hover { background: var(--cfg-gold-hover); }
+
+  /* results */
+  .diag-results-hero { text-align: center; padding: 32px 20px 28px; background: rgba(255,255,255,0.05); border: 0.5px solid var(--border); border-radius: 10px; margin-bottom: 20px; }
+  .diag-score-ring { width: 96px; height: 96px; border-radius: 50%; border: 3px solid var(--cfg-gold); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 18px; }
+  .diag-score-num { font-size: 26px; font-weight: 800; color: var(--cfg-gold); line-height: 1; }
+  .diag-score-den { font-size: 10px; color: var(--text-muted); }
+  .diag-profile-name { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 7px; }
+  .diag-profile-tag { font-size: 13px; color: var(--text-secondary); max-width: 400px; margin: 0 auto; line-height: 1.6; }
+  .diag-area-row { background: rgba(255,255,255,0.05); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 14px; }
+  .diag-ar-icon { font-size: 18px; flex-shrink: 0; }
+  .diag-ar-body { flex: 1; min-width: 0; }
+  .diag-ar-title { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+  .diag-ar-bar-wrap { height: 4px; background: var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 4px; }
+  .diag-ar-bar { height: 100%; border-radius: 10px; }
+  .diag-ar-meta { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); }
+  .diag-badge { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; }
+  .dbadge-s { background: rgba(76,175,130,.15); color: #4CAF82; border: 0.5px solid rgba(76,175,130,.3); }
+  .dbadge-d { background: rgba(212,160,23,.15); color: var(--cfg-gold); border: 0.5px solid rgba(212,160,23,.3); }
+  .dbadge-f { background: rgba(224,90,90,.15); color: #E05A5A; border: 0.5px solid rgba(224,90,90,.3); }
+  .diag-reflection { background: rgba(255,255,255,0.05); border: 0.5px solid var(--border); border-radius: 10px; padding: 18px 20px; margin-bottom: 20px; }
+  .diag-ref-body { font-size: 13px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 14px; }
+  .diag-steps-list { list-style: none; }
+  .diag-steps-list li { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 0.5px solid var(--border); font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+  .diag-steps-list li:last-child { border-bottom: none; }
+  .diag-step-dot { width: 18px; height: 18px; border-radius: 50%; background: rgba(212,160,23,.12); border: 0.5px solid rgba(212,160,23,.3); display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: var(--cfg-gold); flex-shrink: 0; margin-top: 2px; }
+  .diag-cta { background: linear-gradient(135deg,rgba(45,35,128,.8),rgba(83,74,183,.3)); border: 0.5px solid rgba(212,160,23,.3); border-radius: 10px; padding: 22px 20px; text-align: center; margin-bottom: 20px; }
+  .diag-cta h3 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 7px; }
+  .diag-cta p { font-size: 12px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 16px; }
+  .diag-cta-btns { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .diag-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+
+  /* sub-screens within page-diagnostic */
+  .diag-screen { display: none; }
+  .diag-screen.diag-active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="site-wrap">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo">
+      <span class="nav-logo-main">Change For <span>Good</span> Consulting</span>
+      <span class="nav-logo-sub">Strategies that transform. Results that endure.</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="showPage('home',this)">Home</button>
+      <button class="nav-btn" onclick="showPage('about',this)">About</button>
+      <button class="nav-btn" onclick="showPage('services',this)">Services</button>
+      <button class="nav-btn" onclick="showPage('results',this)">Results</button>
+      <button class="nav-btn" onclick="showPage('resources',this)">Resources</button>
+      <button class="nav-btn" onclick="showPage('diagnostic',this)">Diagnostic</button>
+      <button class="nav-btn" onclick="showPage('contact',this)">Contact</button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ HOME ═══ -->
+  <div id="page-home" class="page active">
+
+    <div class="hero">
+      <p class="eyebrow">Management consulting &middot; coaching &middot; innovation</p>
+      <h1>The gap between where you are and where you want to be &mdash; is closeable.</h1>
+      <p>Change For Good Consulting partners with businesses and leaders to turn honest strategy into measurable results. Not frameworks on a slide deck. Real plans. Real growth. Change that lasts &mdash; for good.</p>
+      <div class="hero-actions">
+        <button class="btn-primary">Start the conversation</button>
+        <button class="btn-outline">Explore our services</button>
+      </div>
+    </div>
+
+    <div class="proof-strip">
+      <span style="font-size:11px;color:var(--text-muted)">Clients include</span>
+      <span class="proof-logo">PAL</span>
+      <span class="proof-logo">YSU Group</span>
+      <span class="proof-logo">BSP</span>
+      <span class="proof-logo">JCI Philippines</span>
+    </div>
+
+    <div class="section">
+      <div class="photo-ph">&#128247; Photo of Chenny &mdash; warm, professional, natural light</div>
+      <div class="g3">
+        <div class="card">
+          <span class="card-icon">&#128161;</span>
+          <h4>Clarity first</h4>
+          <p>Honest diagnosis before any solution is prescribed. We start with truth, not assumptions.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">&#128200;</span>
+          <h4>Tangible results</h4>
+          <p>Every recommendation becomes a concrete, measurable action &mdash; not a theory.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">&#9854;</span>
+          <h4>Infinite growth</h4>
+          <p>We invest in the whole person, not just the business problem. Growth without a ceiling.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <blockquote class="quote-block">
+        &ldquo;The most powerful thing a consultant can offer is not just a plan &mdash; but the kind of thinking that changes how a leader sees themselves and their work.&rdquo;
+        <div class="quote-attr">&mdash; Chenny Galano, Founder</div>
+      </blockquote>
+    </div>
+
+    <div class="section">
+      <p class="slabel">What we do</p>
+      <div class="g2 mb12">
+        <div class="card"><h4>Strategy consulting</h4><p>Vision, direction, competitive positioning, and strategic road-mapping built for the long game.</p></div>
+        <div class="card"><h4>Marketing and branding</h4><p>Brand identity, messaging, digital strategy, and campaigns that make you impossible to ignore.</p></div>
+        <div class="card"><h4>Sales consulting</h4><p>Sales process design, team coaching, pipeline development, and revenue performance systems.</p></div>
+        <div class="card"><h4>Business development</h4><p>Partnerships, new revenue streams, stakeholder engagement, and scaling frameworks.</p></div>
+      </div>
+      <div class="flex-gap">
+        <div class="card" style="flex:1;border-left:3px solid var(--cfg-gold-bright)">
+          <span class="tag-gold mb10" style="display:inline-block">Signature programme</span>
+          <h4 class="mt6">Coaching for infinite growth</h4>
+          <p style="margin-top:4px">A transformational methodology for individuals committed to growing in character and professional life &mdash; without limit.</p>
+        </div>
+        <div class="card" style="flex:1;border-left:3px solid rgba(83,74,183,0.8)">
+          <span class="tag-purple mb10" style="display:inline-block">Innovation practice</span>
+          <h4 class="mt6">Innovation sprint and program design</h4>
+          <p style="margin-top:4px">Structured sprints and programs that equip leaders to challenge assumptions and reimagine what&rsquo;s possible.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="text-align:center;padding:28px">
+      <p style="font-size:14px;color:var(--text-secondary);margin:0 0 14px;max-width:440px;margin-left:auto;margin-right:auto">Ready to close the gap? Let&rsquo;s talk about where you are and where you want to be.</p>
+      <button class="btn-primary">Book a free discovery call</button>
+    </div>
+
+    <div class="footer-strip">
+      <span class="foot-left">Change For Good Consulting &middot; Philippines</span>
+      <span class="foot-right">chenny@cfgconsultingph.com</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ ABOUT ═══ -->
+  <div id="page-about" class="page">
+
+    <div class="hero">
+      <p class="eyebrow">Meet the founder</p>
+      <h1>Chenny Galano &mdash; consultant, coach, and someone who has done the inner work herself.</h1>
+      <p>Change For Good Consulting was built from lived understanding: that strategy without self-awareness is incomplete, and that the most powerful growth happens when professional excellence and personal development are pursued together.</p>
+    </div>
+
+    <div class="section">
+      <div class="photo-ph">&#128247; Candid photo of Chenny &mdash; genuine, warm, in her element</div>
+      <p style="font-size:14px;color:var(--text-secondary);line-height:1.75;margin:0 0 14px">Chenny Galano is a change consultant, innovation facilitator, and entrepreneur whose work is rooted in a single conviction: that transformation is not an event &mdash; it is a practice. As the Founder of Change For Good Consulting, she brings together strategic clarity, creative intelligence, and human-centered methodology to help organizations not just improve, but fundamentally become what they were always meant to be.</p>
+      <p style="font-size:14px;color:var(--text-secondary);line-height:1.75;margin:0 0 14px">Her foundation is both creative and rigorous. Trained in Communication Arts and Advertising, and shaped by years in the world of print media and glossy publishing, Chenny developed an early mastery of narrative, brand, and the art of making ideas land with impact. This creative lens became the bedrock of something deeper &mdash; a career at the intersection of strategy, innovation, and leadership development.</p>
+      <p style="font-size:14px;color:var(--text-secondary);line-height:1.75;margin:0 0 14px">As President of the Rizal Academy for Innovation and Leadership (TRAIL) from 2021 to 2026, Chenny led the design and execution of strategic initiatives, innovation programs, and transformative learning experiences &mdash; not as an outside advisor, but as an institution builder. It is this inside-out understanding of how organizations grow, struggle, and evolve that distinguishes her practice. She has worked with organizations across industries &mdash; including PAL and BSP &mdash; designing programs that produce measurable, lasting results.</p>
+      <p style="font-size:14px;color:var(--text-secondary);line-height:1.75;margin:0 0 14px">What sets Chenny apart is her rare ability to hold both the vision and the blueprint. She is equally at home facilitating an Innovation Sprint using Exponential Organization frameworks and Design Thinking, coaching a senior executive through a leadership identity shift, or building a go-to-market strategy from the ground up. Her toolkit spans ExO, Business Model Design, Systems Thinking, Theory U, De Bono&rsquo;s Six Thinking Hats, and Action Learning &mdash; but her real methodology is the belief that real change must be felt before it can be measured.</p>
+      <p style="font-size:14px;color:var(--text-secondary);line-height:1.75;margin:0 0 14px">A certified coach and consultant, and a proud alumna of Junior Chamber International Philippines where she served as National Training Director in 2016, Chenny carries with her a lifelong commitment to community, continuous learning, and the development of people who lead with purpose.</p>
+      <p style="font-size:14px;color:var(--text-secondary);line-height:1.75;margin:0">Change For Good Consulting is the fullest expression of that life&rsquo;s work &mdash; a firm built not merely to advise, but to walk alongside businesses in the hard, meaningful work of becoming. Change, for good. Change, forever.</p>
+    </div>
+
+    <div class="section section-alt">
+      <blockquote class="quote-block">
+        &ldquo;My motivation has changed. I always have in mind how we will be able to support and impact more lives, organizations, and the society. I have a bigger vision &mdash; and it excites me to do the work over and over again.&rdquo;
+        <div class="quote-attr">&mdash; Chenny Galano</div>
+      </blockquote>
+    </div>
+
+    <div class="section">
+      <p class="slabel">Credentials and experience</p>
+
+      <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--cfg-gold);margin:0 0 8px;margin-top:4px">Education</p>
+      <div class="cred-item">
+        <span class="cred-icon">&#127979;</span>
+        <div><div class="cred-title">Master of Business Administration (MBA) &mdash; With Honors</div><div class="cred-sub">Miriam College School of Business and Economics Administration (SBEA) &middot; 2023&ndash;2025 &middot; Best in Capstone for Strategic Management</div></div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">&#127979;</span>
+        <div><div class="cred-title">MBA Undergraduate Units</div><div class="cred-sub">Nexford University, Washington D.C. &middot; 2021&ndash;2022</div></div>
+      </div>
+      <div class="cred-item" style="margin-bottom:14px">
+        <span class="cred-icon">&#127979;</span>
+        <div><div class="cred-title">AB Communication Arts and Advertising</div><div class="cred-sub">Miriam College Loyola Heights, Quezon City &middot; 2001&ndash;2005</div></div>
+      </div>
+
+      <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--cfg-gold);margin:0 0 8px">Coaching</p>
+      <div class="cred-item">
+        <span class="cred-icon">&#127891;</span>
+        <div><div class="cred-title">PCC ACSTH &mdash; International Coaching Federation (ICF)</div><div class="cred-sub">ICF Training &middot; May&ndash;December 2021</div></div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">&#127891;</span>
+        <div><div class="cred-title">Transformative Coaching Certification</div><div class="cred-sub">Coach Masters Academy, Singapore / Philippines &middot; 2019&ndash;2020</div></div>
+      </div>
+      <div class="cred-item" style="margin-bottom:14px">
+        <span class="cred-icon">&#127891;</span>
+        <div><div class="cred-title">Executive Coaching Training Program</div><div class="cred-sub">TRAIL (Rizal Academy for Innovation and Leadership), Philippines &middot; 2017</div></div>
+      </div>
+
+      <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--cfg-gold);margin:0 0 8px">Innovation &amp; Organizational Transformation</p>
+      <div class="cred-item">
+        <span class="cred-icon">&#128161;</span>
+        <div><div class="cred-title">ExO Foundations &middot; ExO Consultant Certification &middot; ExO Trainer EU</div><div class="cred-sub">Exponential Organizations &middot; March&ndash;May 2020</div></div>
+      </div>
+      <div class="cred-item" style="margin-bottom:14px">
+        <span class="cred-icon">&#128161;</span>
+        <div><div class="cred-title">2030 SDGs Game Facilitator Certification</div><div class="cred-sub">Imacocollabo &middot; February&ndash;March 2020</div></div>
+      </div>
+
+      <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--cfg-gold);margin:0 0 8px">Theory U &amp; Presencing</p>
+      <div class="cred-item">
+        <span class="cred-icon">&#9854;</span>
+        <div><div class="cred-title">u-Lab: Societal Transformation Lab</div><div class="cred-sub">Presencing Institute / MIT &middot; 2019 &amp; 2020</div></div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">&#9854;</span>
+        <div><div class="cred-title">Digital Leadership Program &middot; Presencing Foundation Program &middot; Awareness Practices for Leadership</div><div class="cred-sub">Presencing Institute U.Academy &middot; 2020</div></div>
+      </div>
+      <div class="cred-item" style="margin-bottom:14px">
+        <span class="cred-icon">&#9854;</span>
+        <div><div class="cred-title">Focused Training in Constellations &mdash; Modules 1, 2, 3</div><div class="cred-sub">Bali, Indonesia &amp; Online &middot; 2019&ndash;2021</div></div>
+      </div>
+
+      <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--cfg-gold);margin:0 0 8px">Leadership &amp; Facilitation</p>
+      <div class="cred-item">
+        <span class="cred-icon">&#127970;</span>
+        <div><div class="cred-title">President &mdash; Rizal Academy for Innovation and Leadership (TRAIL)</div><div class="cred-sub">2021&ndash;2026 &middot; Led strategic initiatives, innovation programs, and transformative learning across the Philippines</div></div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">&#128101;</span>
+        <div><div class="cred-title">National Training Director &mdash; JCI Philippines</div><div class="cred-sub">JCI Manile&ntilde;a Chapter &middot; 2016 &middot; Training design, strategic management, community engagement</div></div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">&#128101;</span>
+        <div><div class="cred-title">ELIAS &mdash; Emerging Leaders Innovating Across Sectors</div><div class="cred-sub">2018</div></div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">&#128101;</span>
+        <div><div class="cred-title">Dance of Change in the Age of Complexity &mdash; Dr. Peter Senge</div><div class="cred-sub">Philippines &middot; February 2018</div></div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">&#128101;</span>
+        <div><div class="cred-title">Thriving in the Age of Disruption &mdash; Dr. Otto Scharmer</div><div class="cred-sub">Philippines &middot; May 2019</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="slabel">How we work</p>
+      <div class="val-item">
+        <span style="font-size:20px;color:var(--cfg-gold);flex-shrink:0">&#128065;</span>
+        <div><div class="val-title">Integrity &mdash; we say the hard things, kindly</div><div class="val-body">Honest diagnosis before any solution is prescribed. We will never tell you what you want to hear at the expense of what you need to hear.</div></div>
+      </div>
+      <div class="val-item">
+        <span style="font-size:20px;color:var(--cfg-gold);flex-shrink:0">&#128737;</span>
+        <div><div class="val-title">Courage &mdash; we commit to measurable outcomes</div><div class="val-body">Every engagement ends not with a presentation but with a plan, a team aligned behind it, and people growing in skill and in character.</div></div>
+      </div>
+      <div class="val-item">
+        <span style="font-size:20px;color:var(--cfg-gold);flex-shrink:0">&#9854;</span>
+        <div><div class="val-title">Infinite growth &mdash; built with you, not handed down</div><div class="val-body">Solutions co-created with your team. We believe every person &mdash; and every business &mdash; holds more potential than they have yet discovered.</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ SERVICES ═══ -->
+  <div id="page-services" class="page">
+
+    <div class="hero">
+      <p class="eyebrow">What we offer</p>
+      <h1>Six ways to work with us &mdash; all built around your real situation.</h1>
+      <p>Whether you&rsquo;re a startup founder seeking traction, an SME ready to scale, or a leader committed to growing yourself and your team &mdash; there is an engagement designed for where you are right now.</p>
+    </div>
+
+    <div class="section">
+      <div class="svc-card featured">
+        <span class="tag-gold">Signature programme</span>
+        <div class="svc-title">Coaching for infinite growth</div>
+        <div class="svc-desc">A transformational methodology for individuals committed to growing in character and professional life &mdash; without limit. Covers personal values clarification, leadership character development, professional vision mapping, mindset and behavioral coaching, and accountability systems for sustained growth.</div>
+        <div class="svc-meta">Best for: executives, founders, and high-achievers ready to integrate personal excellence into professional impact</div>
+        <button class="btn-primary btn-sm">Inquire about this programme</button>
+      </div>
+
+      <div class="g2 mb12">
+        <div class="svc-card">
+          <span class="tag-purple">01</span>
+          <div class="svc-title">Strategy consulting</div>
+          <div class="svc-desc">Business vision and direction setting, competitive positioning, strategic planning, growth strategy, and organizational design. We turn ambition into a road map your team can actually follow.</div>
+        </div>
+        <div class="svc-card">
+          <span class="tag-purple">02</span>
+          <div class="svc-title">Marketing and branding</div>
+          <div class="svc-desc">Brand identity development, messaging and positioning, marketing strategy, digital marketing, and content strategy. We make sure the world sees what you truly are.</div>
+        </div>
+        <div class="svc-card">
+          <span class="tag-purple">03</span>
+          <div class="svc-title">Sales consulting</div>
+          <div class="svc-desc">Sales process design and optimization, team structure and coaching frameworks, pipeline development, customer acquisition and retention systems, and revenue performance reviews.</div>
+        </div>
+        <div class="svc-card">
+          <span class="tag-purple">04</span>
+          <div class="svc-title">Business development</div>
+          <div class="svc-desc">Partnership development, new revenue stream identification, stakeholder engagement strategies, proposal and pitch development, and scaling frameworks for growing businesses.</div>
+        </div>
+      </div>
+
+      <div class="svc-card" style="border-left:3px solid rgba(83,74,183,0.8)">
+        <span class="tag-purple">Innovation practice</span>
+        <div class="svc-title">Innovation sprint and program design</div>
+        <div class="svc-desc">Structured innovation sprints and multi-phase programs using globally proven frameworks &mdash; ExO, Business Model Canvas, Design Thinking, De Bono&rsquo;s Six Thinking Hats, Systems Thinking, and Theory U. We equip leaders and teams to challenge assumptions and bring new ideas to life.</div>
+        <div class="svc-meta">Past work: innovation summit design, business model redesign workshops, strategic ideation and prototyping, ExO strategy and MTP alignment</div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <p class="slabel">How an engagement works</p>
+      <div class="step-row">
+        <div class="step-item"><div class="step-num">1</div><div class="step-title">Discovery call</div><div class="step-desc">Free conversation &mdash; we learn about your business and goals</div></div>
+        <div class="step-item"><div class="step-num">2</div><div class="step-title">Honest diagnosis</div><div class="step-desc">We assess where you are before proposing anything</div></div>
+        <div class="step-item"><div class="step-num">3</div><div class="step-title">Co-create the plan</div><div class="step-desc">Solutions built with your team, not handed down</div></div>
+        <div class="step-item"><div class="step-num">4</div><div class="step-title">Walk alongside</div><div class="step-desc">We stay with you through implementation &mdash; not just strategy</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="slabel">Who we serve</p>
+      <div class="g2">
+        <div class="card"><h4>SMEs</h4><p>Established businesses ready to sharpen strategy, strengthen brand, and build systems that turn ambition into sustainable growth.</p></div>
+        <div class="card"><h4>Startups</h4><p>Founders with a vision who need clarity, positioning, and go-to-market strategy to move from idea to traction with confidence.</p></div>
+        <div class="card"><h4>Social enterprises</h4><p>Mission-led organizations that need business rigour to match their social purpose &mdash; doing good and performing well are not a trade-off.</p></div>
+        <div class="card"><h4>Diverse organizations</h4><p>Organizations spanning multiple sectors who need an integrated consulting partner that can navigate complexity and deliver coherent strategy.</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ RESULTS ═══ -->
+  <div id="page-results" class="page">
+
+    <div class="hero">
+      <p class="eyebrow">Proven client results</p>
+      <h1>We don&rsquo;t measure success in deliverables. We measure it in change.</h1>
+      <p>From national institutions to growing enterprises &mdash; here is what working with Change For Good Consulting looks like in practice.</p>
+    </div>
+
+    <div class="section">
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-num">5+</div><div class="stat-lbl">major organization transformations supported</div></div>
+        <div class="stat-box"><div class="stat-num">25+</div><div class="stat-lbl">strategic initiatives for PAL</div></div>
+        <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">commitment to measurable outcomes</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="slabel">Client case highlights</p>
+      <div class="result-card">
+        <div class="gold-bar"></div>
+        <div class="flex-between mb10"><div class="result-client">YSU Group</div><span class="tag-gold">Business development</span></div>
+        <p class="result-body">Led a business model redesign process that identified new verticals and revenue streams, repositioning the organization for sustainable, diversified growth beyond its existing portfolio.</p>
+      </div>
+      <div class="result-card">
+        <div class="gold-bar"></div>
+        <div class="flex-between mb10"><div class="result-client">Philippine Airlines (PAL)</div><span class="tag-gold">Strategy</span></div>
+        <p class="result-body">Facilitated an innovation engagement that surfaced 25+ strategic initiatives, presented directly to senior leadership. The process challenged existing assumptions and opened new directions for the organization&rsquo;s growth trajectory.</p>
+      </div>
+      <div class="result-card">
+        <div class="gold-bar"></div>
+        <div class="flex-between mb10"><div class="result-client">Bangko Sentral ng Pilipinas (BSP)</div><span class="tag-gold">Coaching &amp; Continuous Improvement</span></div>
+        <p class="result-body">Integrated Personal Mastery coaching within BSP&rsquo;s Lean Six Sigma program &mdash; helping participants grow not just in process proficiency but in self-awareness and leadership character.</p>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <p class="slabel">What clients say</p>
+      <div class="result-card mb12">
+        <div class="testimonial">
+          <div class="avatar">SE</div>
+          <div>
+            <div class="testi-quote">&ldquo;Working with Change For Good wasn&rsquo;t just about getting a plan &mdash; it was about becoming the kind of leader who could actually execute it. The shift in how I saw myself and my work was the real result.&rdquo;</div>
+            <div class="testi-attr">&mdash; Senior Executive, Financial Services</div>
+          </div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="testimonial">
+          <div class="avatar">FD</div>
+          <div>
+            <div class="testi-quote">&ldquo;Chenny has a rare ability to hold up a mirror without making you feel judged. The strategy work was excellent &mdash; but it was the coaching dimension that made it stick.&rdquo;</div>
+            <div class="testi-attr">&mdash; Founder, Social Enterprise &middot; Manila</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="text-align:center;padding:28px">
+      <p style="font-size:14px;color:var(--text-secondary);margin:0 0 14px">Your organization&rsquo;s story could be next.</p>
+      <button class="btn-primary">Let&rsquo;s talk about your goals</button>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ RESOURCES ═══ -->
+  <div id="page-resources" class="page">
+
+    <div class="hero">
+      <p class="eyebrow">Insights and tools</p>
+      <h1>Practical thinking for leaders who take growth seriously.</h1>
+      <p>Resources built from real consulting and coaching experience &mdash; not generic advice. For business owners, executives, and individuals committed to becoming their best.</p>
+    </div>
+
+    <div class="section">
+      <div class="download-banner">
+        <span class="dl-icon">&#11015;</span>
+        <div>
+          <span class="tag-gold" style="display:inline-block;margin-bottom:8px">Free download</span>
+          <div class="svc-title" style="margin-top:0">The clarity-first diagnostic &mdash; a self-assessment for leaders</div>
+          <div class="svc-desc">10 honest questions that reveal where your business strategy is strong, where it is fragile, and what to prioritize first. Used by leaders across the Philippines and beyond.</div>
+          <button class="btn-gold btn-sm" onclick="goToDiagnostic()">Take the free diagnostic &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="slabel">From the desk of Chenny</p>
+      <div class="g3">
+        <div class="art-card">
+          <div class="art-img">&#128247; Cover image</div>
+          <div class="art-body">
+            <span class="tag-purple" style="font-size:10px">Strategy</span>
+            <div class="art-title">Why most strategic plans fail before they start</div>
+            <div class="art-meta">5 min read</div>
+          </div>
+        </div>
+        <div class="art-card">
+          <div class="art-img">&#128247; Cover image</div>
+          <div class="art-body">
+            <span class="tag-purple" style="font-size:10px">Leadership</span>
+            <div class="art-title">The inner work that makes strategy stick</div>
+            <div class="art-meta">4 min read</div>
+          </div>
+        </div>
+        <div class="art-card">
+          <div class="art-img">&#128247; Cover image</div>
+          <div class="art-body">
+            <span class="tag-purple" style="font-size:10px">Growth</span>
+            <div class="art-title">Change for good &mdash; what continuous improvement really means</div>
+            <div class="art-meta">6 min read</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <p class="slabel">Stay connected</p>
+      <p style="font-size:14px;color:var(--text-secondary);line-height:1.7">When there&rsquo;s something worth saying &mdash; strategy, coaching, and the honest conversations most consultants avoid.</p>
+      <div class="newsletter-row">
+        <input type="email" placeholder="your@email.com">
+        <button class="btn-primary btn-sm" style="white-space:nowrap">Subscribe</button>
+      </div>
+      <div class="trust-note">&#128274; No spam. Unsubscribe anytime. Your information is never shared.</div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ DIAGNOSTIC ═══ -->
+  <div id="page-diagnostic" class="page">
+
+    <!-- INTRO sub-screen -->
+    <div id="diag-intro" class="diag-screen diag-active">
+      <div class="diag-wrap">
+        <div class="diag-tag">Free Leadership Assessment</div>
+        <h1 class="diag-h1">The <em>Clarity-First</em> Diagnostic</h1>
+        <p class="diag-lead">Ten honest questions that reveal where your business strategy is strong, where it is fragile, and what to prioritize first.</p>
+        <p class="diag-lead">Most leaders are moving fast. This is an invitation to pause &mdash; and see clearly. Because the gap between where you are and where you want to be is only closeable once you know exactly where it starts.</p>
+        <div class="diag-how">
+          <div class="diag-how-title">How it works</div>
+          <div class="diag-steps">
+            <div class="diag-step"><div class="diag-step-num">10</div><p>Honest questions across 5 leadership areas</p></div>
+            <div class="diag-step"><div class="diag-step-num">5&rsquo;</div><p>Takes about five minutes to complete</p></div>
+            <div class="diag-step"><div class="diag-step-num">1</div><p>Personalised profile with next steps &mdash; instantly</p></div>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="diagStart()">Begin the diagnostic &rarr;</button>
+      </div>
+    </div>
+
+    <!-- QUESTIONS sub-screen -->
+    <div id="diag-questions" class="diag-screen">
+      <div class="diag-wrap">
+        <div class="diag-prog-wrap">
+          <div class="diag-prog-meta">
+            <span id="diag-prog-label">Question 1 of 10</span>
+            <span id="diag-prog-pct">0% complete</span>
+          </div>
+          <div class="diag-prog-track"><div class="diag-prog-fill" id="diag-prog-fill" style="width:0%"></div></div>
+        </div>
+        <div id="diag-qcontainer"></div>
+        <div class="diag-nav">
+          <button class="diag-back" id="diag-btn-back" onclick="diagPrev()">&#8592; Back</button>
+          <button class="diag-next" id="diag-btn-next" onclick="diagNext()">Next &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS sub-screen -->
+    <div id="diag-results" class="diag-screen">
+      <div class="diag-wrap">
+        <div class="diag-results-hero" id="diag-results-hero"></div>
+        <div class="diag-actions">
+          <button class="btn-primary" onclick="window.print()">&#8595; Download results (PDF)</button>
+          <button class="btn-outline" onclick="diagRetake()">Retake diagnostic</button>
+        </div>
+        <p class="slabel">Your results by area</p>
+        <div id="diag-area-results" style="margin-bottom:20px;"></div>
+        <p class="slabel">Your reflection summary</p>
+        <div class="diag-reflection" id="diag-reflection"></div>
+        <div class="diag-cta">
+          <h3>Ready to close the gap?</h3>
+          <p>Your results are a starting point &mdash; not a verdict. A Discovery Call with Chenny Galano is a focused, no-pressure conversation about what the diagnostic revealed and what a realistic path forward looks like for your organisation.</p>
+          <div class="diag-cta-btns">
+            <a href="mailto:chenny@cfgconsultingph.com?subject=Discovery Call - Clarity-First Diagnostic" class="btn-primary" style="text-decoration:none;font-size:13px;">Book a Discovery Call</a>
+            <a href="https://linkedin.com/in/chenny-galano" target="_blank" class="btn-outline" style="text-decoration:none;font-size:13px;">Connect on LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ CONTACT ═══ -->
+  <div id="page-contact" class="page">
+
+    <div class="hero">
+      <p class="eyebrow">Let&rsquo;s start a conversation</p>
+      <h1>We would love to learn about your business and explore how we can help.</h1>
+      <p>Reach out &mdash; no sales pitch, no pressure. Just an honest conversation about where you are, where you want to be, and whether Change For Good Consulting is the right partner for that journey.</p>
+    </div>
+
+    <div class="section">
+      <div class="g2" style="align-items:start">
+        <div>
+          <div class="form-field"><label>Your name</label><input type="text" placeholder="Juan dela Cruz"></div>
+          <div class="form-field"><label>Email address</label><input type="email" placeholder="juan@yourcompany.com"></div>
+          <div class="form-field"><label>Organization</label><input type="text" placeholder="Company name or 'Individual'"></div>
+          <div class="form-field"><label>What are you working through?</label><textarea placeholder="Tell us about your situation &mdash; your goals, your challenges, and what kind of support you&rsquo;re looking for..."></textarea></div>
+          <div class="form-field">
+            <label>Service area of interest</label>
+            <select>
+              <option>Strategy consulting</option>
+              <option>Marketing and branding</option>
+              <option>Sales consulting</option>
+              <option>Business development</option>
+              <option>Coaching for infinite growth</option>
+              <option>Innovation sprint and program design</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <button class="btn-primary w100">Send message</button>
+          <div class="trust-note">&#128274; Your details are never shared or sold.</div>
+        </div>
+        <div>
+          <div class="card mb12">
+            <p class="slabel" style="margin-bottom:10px">What happens next</p>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;gap:10px;align-items:flex-start"><div class="step-num" style="flex-shrink:0">1</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.55">You&rsquo;ll receive a confirmation within minutes of submitting.</div></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><div class="step-num" style="flex-shrink:0">2</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.55">Chenny personally reviews every inquiry and responds within 24 hours.</div></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><div class="step-num" style="flex-shrink:0">3</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.55">We schedule a free discovery call &mdash; relaxed, no obligation, just honest conversation.</div></div>
+            </div>
+          </div>
+          <div class="card mb12">
+            <p class="slabel" style="margin-bottom:12px">Reach us directly</p>
+            <div class="contact-info-row"><span class="contact-info-icon">&#128222;</span>09178086881 &middot; calls, WhatsApp and Viber</div>
+            <div class="contact-info-row"><span class="contact-info-icon">&#9993;</span>chenny@cfgconsultingph.com</div>
+            <div class="contact-info-row"><span class="contact-info-icon">&#128279;</span>linkedin.com/in/chenny-galano</div>
+            <div class="contact-info-row"><span class="contact-info-icon">&#128205;</span>Philippines &middot; working globally</div>
+          </div>
+          <div style="border-radius:10px;padding:14px;background:rgba(212,160,23,0.08);border:0.5px solid rgba(212,160,23,0.25)">
+            <blockquote class="quote-block" style="font-size:13px;background:transparent;padding:0;border-left:3px solid var(--cfg-gold)">
+              &ldquo;We don&rsquo;t just advise &mdash; we walk alongside you in the hard work of becoming what your business, and your people, were always meant to be.&rdquo;
+              <div class="quote-attr">&mdash; Change For Good Consulting</div>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-strip">
+      <span class="foot-left">&copy; Change For Good Consulting &middot; Strategies that transform. Results that endure.</span>
+      <span class="foot-right">Change. For Good.</span>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+// ── PAGE NAV ─────────────────────────────────────────────────
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToDiagnostic() {
+  const btn = document.querySelector('.nav-btn[onclick*="diagnostic"]');
+  showPage('diagnostic', btn);
+  diagShowScreen('diag-intro');
+}
+
+// ── DIAGNOSTIC DATA ───────────────────────────────────────────
+const DAREAS = [
+  { id: 'clarity',    icon: '🧭', title: 'Strategic Clarity',    desc: 'How clear and shared is your direction?' },
+  { id: 'alignment',  icon: '🤝', title: 'Leadership Alignment',  desc: 'Are your leaders unified in purpose and values?' },
+  { id: 'people',     icon: '🌱', title: 'People & Culture',      desc: 'Does your team have the capability and mindset for the future?' },
+  { id: 'innovation', icon: '💡', title: 'Innovation & Growth',   desc: 'Are you building for what is coming, not just what is now?' },
+  { id: 'execution',  icon: '🎯', title: 'Execution & Results',   desc: 'Does strategy become action — with accountability?' },
+];
+
+const DQUESTIONS = [
+  { area: 0, text: 'I can articulate where my organisation is going in the next 3 years in a single, clear statement.' },
+  { area: 0, text: 'My leadership team makes decisions that consistently reflect our stated strategic direction.' },
+  { area: 1, text: 'The people leading this organisation share a common understanding of what success looks like.' },
+  { area: 1, text: 'When we face difficult decisions, we have a clear set of values that guides us — not just instinct or hierarchy.' },
+  { area: 2, text: 'My team has the capability and mindset to deliver the future we are building toward.' },
+  { area: 2, text: 'I am confident that the culture we have today will support — not resist — the changes we need to make.' },
+  { area: 3, text: 'We actively create space to explore new ideas, business models, or ways of working — not just improve what already exists.' },
+  { area: 3, text: 'We have a clear picture of how our industry or market is changing, and we are responding ahead of the curve.' },
+  { area: 4, text: 'We turn strategy into concrete action — with clear owners, timelines, and accountability.' },
+  { area: 4, text: 'When we commit to a goal, we follow through — and we measure whether it actually happened.' },
+];
+
+const DSCALE = [
+  { value: 1, label: 'Not at all true' },
+  { value: 2, label: 'Rarely true' },
+  { value: 3, label: 'Sometimes true' },
+  { value: 4, label: 'Often true' },
+  { value: 5, label: 'Completely true' },
+];
+
+const DPROFILES = [
+  {
+    min: 43, max: 50,
+    name: 'The Aligned Leader',
+    tagline: 'Your strategy is clear, your team is capable, and execution is strong. The work now is about sustaining momentum and leading at the next level.',
+    summary: 'You have built something real. Clarity, alignment, and execution are all present — and the evidence shows in how your team moves. The risk at this stage is complacency or over-optimisation. The highest-performing leaders in your position are asking not just "how do we run this better?" but "what do we need to become next?"',
+    steps: [
+      'Identify the one strategic bet that will define your next 3 years — and ensure your team can articulate it without prompting.',
+      'Invest deliberately in your culture of innovation. High-performing teams need permission to challenge what is working, not just improve it.',
+      'Consider executive coaching or a strategic thinking partnership to keep growing as the complexity of your role increases.',
+    ]
+  },
+  {
+    min: 33, max: 42,
+    name: 'The Capable Builder',
+    tagline: 'Strong foundations are in place, with some meaningful gaps to address. The work is about closing the distance between your intent and your impact.',
+    summary: 'You are doing many things right — and you know where the friction is. Your instincts about what needs to change are probably correct. What is often missing at this stage is not ideas, but structure: a clear process for turning strategic intent into aligned, accountable action across your team.',
+    steps: [
+      'Run a focused strategy alignment session with your leadership team. Surface where interpretations of the direction diverge — even slightly.',
+      'Identify the one cultural or capability gap that is costing you most, and build a 90-day plan to address it specifically.',
+      'Look at your last three major commitments. Were they completed on time, by the right people, with measurable outcomes? If not — that is where to start.',
+    ]
+  },
+  {
+    min: 22, max: 32,
+    name: 'The Emerging Strategist',
+    tagline: 'Direction is forming and ambition is clear, but structure and alignment need to catch up. The foundation is ready to be built.',
+    summary: 'You are at an important inflection point. The ideas are there, the will is there — but the systems and shared clarity are not yet keeping pace with where you want to go. This is not a sign of weakness; it is a sign that you have outgrown your current approach and need to build something more deliberate.',
+    steps: [
+      'Start with a single, written strategic statement that your leadership team agrees on. Test it by asking each person independently what it means to them.',
+      'Map the gap between your current team capability and the capability your strategy actually requires. Be honest about what you see.',
+      'Build one execution habit: a regular rhythm where decisions get made, progress is reviewed, and accountability is shared — consistently.',
+    ]
+  },
+  {
+    min: 10, max: 21,
+    name: 'The Honest Starter',
+    tagline: 'Important gaps are present across multiple areas. The most powerful thing you can do right now is exactly what you are doing — looking clearly at the truth.',
+    summary: 'Taking this diagnostic is itself an act of leadership. What the results are showing is not failure — it is the starting point. Many of the organisations that have made the most profound transformations began exactly here: with a leader willing to see clearly, say it honestly, and do the work without pretending it was already done.',
+    steps: [
+      'Do not try to fix everything at once. Identify the single most important gap — the one that, if addressed, would unlock progress in the others.',
+      'Have an honest conversation with your leadership team about what the diagnostic revealed. Shared awareness is the first building block of shared direction.',
+      'Consider bringing in outside perspective — a consultant, coach, or strategic partner — not to hand you answers, but to help you build the capacity to find your own.',
+    ]
+  },
+];
+
+// ── DIAGNOSTIC STATE ──────────────────────────────────────────
+let dAnswers = new Array(10).fill(null);
+let dCurrent = 0;
+
+function diagShowScreen(id) {
+  document.querySelectorAll('.diag-screen').forEach(s => s.classList.remove('diag-active'));
+  document.getElementById(id).classList.add('diag-active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function diagStart() {
+  dAnswers = new Array(10).fill(null);
+  dCurrent = 0;
+  diagRender();
+  diagShowScreen('diag-questions');
+}
+
+function diagRender() {
+  const q = DQUESTIONS[dCurrent];
+  const area = DAREAS[q.area];
+  const answered = dAnswers[dCurrent];
+
+  const pct = Math.round((dCurrent / 10) * 100);
+  document.getElementById('diag-prog-label').textContent = `Question ${dCurrent + 1} of 10`;
+  document.getElementById('diag-prog-pct').textContent = `${pct}% complete`;
+  document.getElementById('diag-prog-fill').style.width = `${pct}%`;
+
+  document.getElementById('diag-btn-back').style.visibility = dCurrent === 0 ? 'hidden' : 'visible';
+
+  const btnNext = document.getElementById('diag-btn-next');
+  btnNext.textContent = dCurrent === 9 ? 'See my results →' : 'Next →';
+  btnNext.classList.toggle('on', answered !== null);
+
+  document.getElementById('diag-qcontainer').innerHTML = `
+    <div class="diag-area-header">
+      <div class="diag-area-icon">${area.icon}</div>
+      <div>
+        <div class="diag-area-name">${area.title}</div>
+        <div class="diag-area-desc">${area.desc}</div>
+      </div>
+    </div>
+    <div class="diag-qcard">
+      <div class="diag-qnum">Question ${dCurrent + 1}</div>
+      <div class="diag-qtext">${q.text}</div>
+      <div class="diag-scale">
+        ${DSCALE.map(s => `
+          <div class="diag-opt${answered === s.value ? ' sel' : ''}" onclick="diagSelect(${s.value}, this)">
+            <div class="diag-onum">${s.value}</div>
+            <div class="diag-olabel">${s.label}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function diagSelect(value, el) {
+  dAnswers[dCurrent] = value;
+  document.querySelectorAll('.diag-opt').forEach(o => { o.classList.remove('sel'); o.querySelector('.diag-onum').style.background = ''; o.querySelector('.diag-onum').style.color = ''; });
+  el.classList.add('sel');
+  document.getElementById('diag-btn-next').classList.add('on');
+}
+
+function diagNext() {
+  if (dAnswers[dCurrent] === null) return;
+  if (dCurrent < 9) { dCurrent++; diagRender(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  else diagShowResults();
+}
+
+function diagPrev() {
+  if (dCurrent > 0) { dCurrent--; diagRender(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+}
+
+function diagShowResults() {
+  const areaScores = [0, 0, 0, 0, 0];
+  DQUESTIONS.forEach((q, i) => { areaScores[q.area] += dAnswers[i]; });
+  const total = areaScores.reduce((a, b) => a + b, 0);
+  const profile = DPROFILES.find(p => total >= p.min && total <= p.max) || DPROFILES[DPROFILES.length - 1];
+
+  document.getElementById('diag-results-hero').innerHTML = `
+    <div class="diag-score-ring">
+      <div class="diag-score-num">${total}</div>
+      <div class="diag-score-den">out of 50</div>
+    </div>
+    <div class="diag-profile-name">${profile.name}</div>
+    <div class="diag-profile-tag">${profile.tagline}</div>
+  `;
+
+  document.getElementById('diag-area-results').innerHTML = DAREAS.map((area, i) => {
+    const score = areaScores[i];
+    const pct = (score / 10) * 100;
+    const [badgeClass, barColor, label] =
+      score >= 8 ? ['dbadge-s', '#4CAF82', 'Strong'] :
+      score >= 5 ? ['dbadge-d', '#D4A017', 'Developing'] :
+                   ['dbadge-f', '#E05A5A', 'Fragile'];
+    return `
+      <div class="diag-area-row">
+        <div class="diag-ar-icon">${area.icon}</div>
+        <div class="diag-ar-body">
+          <div class="diag-ar-title">${area.title}</div>
+          <div class="diag-ar-bar-wrap"><div class="diag-ar-bar" style="width:${pct}%;background:${barColor};"></div></div>
+          <div class="diag-ar-meta"><span>${area.desc}</span><span>${score} / 10</span></div>
+        </div>
+        <span class="diag-badge ${badgeClass}">${label}</span>
+      </div>
+    `;
+  }).join('');
+
+  const strong  = DAREAS.filter((_, i) => areaScores[i] >= 8).map(a => a.title);
+  const fragile = DAREAS.filter((_, i) => areaScores[i] <= 4).map(a => a.title);
+  const strongText  = strong.length  ? `You are strongest in <strong>${strong.join(' and ')}</strong>. ` : '';
+  const fragileText = fragile.length ? `The areas that need the most attention are <strong>${fragile.join(' and ')}</strong>. ` : '';
+
+  document.getElementById('diag-reflection').innerHTML = `
+    <p class="diag-ref-body">${strongText}${fragileText}${profile.summary}</p>
+    <p class="slabel" style="margin-top:16px;">Suggested next steps</p>
+    <ul class="diag-steps-list">
+      ${profile.steps.map((s, i) => `
+        <li><div class="diag-step-dot">${i + 1}</div><span>${s}</span></li>
+      `).join('')}
+    </ul>
+  `;
+
+  diagShowScreen('diag-results');
+}
+
+function diagRetake() {
+  dAnswers = new Array(10).fill(null);
+  dCurrent = 0;
+  diagShowScreen('diag-intro');
+}
+</script>
+
+</body>
+</html>

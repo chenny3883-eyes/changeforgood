@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "CFG Website",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "/Users/cfg/Documents/AI Coding Files/Code/Change For Good/cfg-nextjs",
+      "port": 3001
+    }
+  ]
+}

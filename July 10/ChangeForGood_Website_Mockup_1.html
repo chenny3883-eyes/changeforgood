@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Change For Good Consulting — Website Mockup</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cfg-purple: #2D2380;
+    --cfg-purple-light: #EEEDFE;
+    --cfg-purple-mid: #534AB7;
+    --cfg-gold: #B8860B;
+    --cfg-gold-light: #FAEEDA;
+    --cfg-gold-bright: #D4A017;
+    --cfg-gold-hover: #F5C842;
+    --surface-0: #f5f4f0;
+    --surface-1: #f9f8f5;
+    --surface-2: #ffffff;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --border: rgba(11,11,11,0.10);
+    --border-strong: rgba(11,11,11,0.18);
+    --radius: 8px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --cfg-purple-light: #1e1a4a;
+      --cfg-gold-light: #2c2000;
+      --surface-0: #111110;
+      --surface-1: #1a1a19;
+      --surface-2: #242422;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --border: rgba(255,255,255,0.10);
+      --border-strong: rgba(255,255,255,0.18);
+    }
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--surface-0);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .site-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 14px;
+    border: 0.5px solid var(--border);
+    overflow: hidden;
+    background: var(--surface-1);
+  }
+
+  /* NAV */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: var(--cfg-purple);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .nav-logo { display: flex; flex-direction: column; }
+  .nav-logo-main { font-size: 14px; font-weight: 600; color: #fff; letter-spacing: .03em; }
+  .nav-logo-main span { color: var(--cfg-gold-bright); }
+  .nav-logo-sub { font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: .04em; margin-top: 2px; }
+  .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+  .nav-btn {
+    padding: 6px 11px;
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    background: none;
+    color: var(--cfg-gold-bright);
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: all .12s;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-btn:hover { background: rgba(212,160,23,.15); color: var(--cfg-gold-hover); }
+  .nav-btn.active { background: rgba(212,160,23,.22); color: var(--cfg-gold-hover); border-bottom: 2px solid var(--cfg-gold-bright); }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero { padding: 32px 28px 26px; border-bottom: 0.5px solid var(--border); background: var(--surface-2); }
+  .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--cfg-gold); margin: 0 0 10px; }
+  .hero h1 { font-size: 24px; font-weight: 600; line-height: 1.3; margin: 0 0 12px; color: var(--cfg-purple); }
+  .hero p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin: 0 0 18px; max-width: 520px; }
+  .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* BUTTONS */
+  .btn-primary { padding: 10px 22px; font-size: 13px; font-weight: 600; background: var(--cfg-purple); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; transition: opacity .12s; }
+  .btn-primary:hover { opacity: .88; }
+  .btn-gold { padding: 10px 22px; font-size: 13px; font-weight: 600; background: var(--cfg-gold-bright); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; transition: opacity .12s; }
+  .btn-gold:hover { opacity: .88; }
+  .btn-outline { padding: 10px 22px; font-size: 13px; background: none; border: 0.5px solid var(--border-strong); color: var(--text-secondary); border-radius: var(--radius); cursor: pointer; }
+  .btn-outline:hover { background: var(--surface-1); }
+  .btn-sm { padding: 7px 16px; font-size: 12px; }
+
+  /* SECTIONS */
+  .section { padding: 22px 28px; border-bottom: 0.5px solid var(--border); background: var(--surface-2); }
+  .section:last-child { border-bottom: none; }
+  .section-alt { background: var(--cfg-purple-light); }
+  .slabel { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--cfg-gold); margin: 0 0 14px; }
+
+  /* PHOTO PLACEHOLDER */
+  .photo-ph {
+    width: 100%; height: 90px;
+    background: var(--surface-0);
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--text-muted);
+    border: 1px dashed var(--border-strong);
+    margin-bottom: 16px;
+  }
+
+  /* GRIDS */
+  .g3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+  .g2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+  @media (max-width: 600px) { .g3 { grid-template-columns: 1fr; } .g2 { grid-template-columns: 1fr; } }
+
+  /* CARDS */
+  .card { background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px; }
+  .card h4 { font-size: 13px; font-weight: 600; color: var(--cfg-purple); margin: 0 0 5px; }
+  .card p { font-size: 12px; color: var(--text-secondary); margin: 0; line-height: 1.55; }
+  .card-icon { font-size: 20px; color: var(--cfg-gold); margin-bottom: 8px; display: block; }
+
+  /* PROOF STRIP */
+  .proof-strip { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 14px 28px; background: var(--surface-1); border-bottom: 0.5px solid var(--border); }
+  .proof-logo { font-size: 11px; font-weight: 600; color: var(--text-muted); padding: 4px 10px; border: 0.5px solid var(--border); border-radius: var(--radius); }
+
+  /* QUOTE */
+  .quote-block { border-left: 3px solid var(--cfg-gold-bright); border-radius: 0 8px 8px 0; padding: 14px 16px; background: var(--cfg-gold-light); font-size: 14px; font-style: italic; color: var(--cfg-purple); line-height: 1.7; }
+  .quote-attr { font-size: 11px; color: var(--cfg-gold); margin-top: 8px; font-style: normal; font-weight: 600; }
+
+  /* STATS */
+  .stat-row { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+  .stat-box { background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+  .stat-num { font-size: 26px; font-weight: 600; color: var(--cfg-purple); }
+  .stat-lbl { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+
+  /* STEPS */
+  .step-row { display: flex; align-items: flex-start; }
+  .step-item { flex: 1; text-align: center; padding: 0 8px; }
+  .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--cfg-purple-light); color: var(--cfg-purple-mid); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
+  .step-title { font-size: 12px; font-weight: 600; color: var(--cfg-purple); margin: 0 0 3px; }
+  .step-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
+
+  /* TAGS */
+  .tag-purple { display: inline-block; font-size: 10px; padding: 2px 9px; border-radius: 20px; background: var(--cfg-purple-light); color: var(--cfg-purple-mid); font-weight: 600; }
+  .tag-gold { display: inline-block; font-size: 10px; padding: 2px 9px; border-radius: 20px; background: var(--cfg-gold-light); color: var(--cfg-gold); font-weight: 600; }
+
+  /* CREDENTIALS */
+  .cred-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
+  .cred-item:last-child { border-bottom: none; }
+  .cred-icon { font-size: 18px; color: var(--cfg-gold); flex-shrink: 0; margin-top: 1px; }
+  .cred-title { font-size: 13px; font-weight: 600; color: var(--cfg-purple); }
+  .cred-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* VALUES */
+  .val-item { display: flex; gap: 12px; align-items: flex-start; padding: 11px 0; border-bottom: 0.5px solid var(--border); }
+  .val-item:last-child { border-bottom: none; }
+  .val-title { font-size: 13px; font-weight: 600; color: var(--cfg-purple); margin-bottom: 3px; }
+  .val-body { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+
+  /* SERVICE CARDS */
+  .svc-card { background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+  .svc-card.featured { border: 2px solid var(--cfg-purple); }
+  .svc-title { font-size: 15px; font-weight: 600; color: var(--cfg-purple); margin: 8px 0 5px; }
+  .svc-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin: 0 0 10px; }
+  .svc-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
+
+  /* TESTIMONIALS */
+  .testimonial { display: flex; gap: 12px; align-items: flex-start; }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--cfg-purple-light); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--cfg-purple-mid); flex-shrink: 0; }
+  .testi-quote { font-size: 13px; font-style: italic; color: var(--text-secondary); line-height: 1.65; }
+  .testi-attr { font-size: 11px; color: var(--cfg-gold); margin-top: 6px; font-weight: 600; }
+
+  /* ARTICLE CARDS */
+  .art-card { background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .art-img { height: 52px; background: var(--surface-0); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted); }
+  .art-body { padding: 12px; }
+  .art-title { font-size: 12px; font-weight: 600; color: var(--cfg-purple); line-height: 1.4; margin: 6px 0 4px; }
+  .art-meta { font-size: 11px; color: var(--text-muted); }
+
+  /* RESULT CARDS */
+  .result-card { background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+  .gold-bar { height: 3px; background: var(--cfg-gold-bright); border-radius: 2px; margin-bottom: 12px; }
+  .result-client { font-size: 13px; font-weight: 600; color: var(--cfg-purple); }
+  .result-body { font-size: 12px; color: var(--text-secondary); margin: 0; line-height: 1.65; }
+
+  /* FORM */
+  .form-field { margin-bottom: 12px; }
+  .form-field label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; font-weight: 500; }
+  .form-field input, .form-field textarea, .form-field select {
+    width: 100%; font-size: 13px; padding: 8px 10px;
+    border: 0.5px solid var(--border-strong); border-radius: var(--radius);
+    background: var(--surface-2); color: var(--text-primary);
+    font-family: inherit; outline: none;
+  }
+  .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--cfg-purple); }
+  .form-field textarea { height: 80px; resize: vertical; }
+
+  /* TRUST NOTE */
+  .trust-note { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); margin-top: 10px; }
+
+  /* CONTACT INFO */
+  .contact-info-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary); padding: 5px 0; }
+  .contact-info-icon { font-size: 15px; color: var(--cfg-gold); width: 20px; flex-shrink: 0; }
+
+  /* DOWNLOAD BANNER */
+  .download-banner { background: var(--cfg-purple-light); border: 2px solid var(--cfg-gold-bright); border-radius: 10px; padding: 16px; display: flex; gap: 16px; align-items: center; margin-bottom: 12px; }
+  .dl-icon { font-size: 32px; color: var(--cfg-gold); flex-shrink: 0; }
+
+  /* NEWSLETTER */
+  .newsletter-row { display: flex; gap: 10px; margin-top: 10px; }
+  .newsletter-row input { flex: 1; font-size: 13px; padding: 8px 10px; border: 0.5px solid var(--border-strong); border-radius: var(--radius); background: var(--surface-2); color: var(--text-primary); font-family: inherit; outline: none; }
+
+  /* FOOTER */
+  .footer-strip { background: var(--cfg-purple); padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .footer-strip .foot-left { font-size: 11px; color: rgba(255,255,255,.5); }
+  .footer-strip .foot-right { font-size: 11px; color: var(--cfg-gold-bright); font-weight: 600; }
+
+  /* INLINE FLEX HELPERS */
+  .flex-between { display: flex; justify-content: space-between; align-items: flex-start; }
+  .flex-gap { display: flex; gap: 10px; }
+  .mt6 { margin-top: 6px; }
+  .mt10 { margin-top: 10px; }
+  .mt12 { margin-top: 12px; }
+  .mb10 { margin-bottom: 10px; }
+  .mb12 { margin-bottom: 12px; }
+  .w100 { width: 100%; }
+
+  /* DECORATIVE ICON (used inline as text substitute) */
+  .ico { display: inline-block; width: 18px; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="site-wrap">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo">
+      <span class="nav-logo-main">Change For <span>Good</span> Consulting</span>
+      <span class="nav-logo-sub">Strategies that transform. Results that endure.</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="showPage('home',this)">Home</button>
+      <button class="nav-btn" onclick="showPage('about',this)">About</button>
+      <button class="nav-btn" onclick="showPage('services',this)">Services</button>
+      <button class="nav-btn" onclick="showPage('results',this)">Results</button>
+      <button class="nav-btn" onclick="showPage('resources',this)">Resources</button>
+      <button class="nav-btn" onclick="showPage('contact',this)">Contact</button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ HOME ═══ -->
+  <div id="page-home" class="page active">
+
+    <div class="hero">
+      <p class="eyebrow">Management consulting &middot; coaching &middot; innovation</p>
+      <h1>The gap between where you are and where you want to be &mdash; is closeable.</h1>
+      <p>Change For Good Consulting partners with businesses and leaders to turn honest strategy into measurable results. Not frameworks on a slide deck. Real plans. Real growth. Change that lasts &mdash; for good.</p>
+      <div class="hero-actions">
+        <button class="btn-primary">Start the conversation</button>
+        <button class="btn-outline">Explore our services</button>
+      </div>
+    </div>
+
+    <div class="proof-strip">
+      <span style="font-size:11px;color:var(--text-muted)">Clients include</span>
+      <span class="proof-logo">PAL</span>
+      <span class="proof-logo">YSU Group</span>
+      <span class="proof-logo">BSP</span>
+      <span class="proof-logo">JCI Philippines</span>
+    </div>
+
+    <div class="section">
+      <div class="photo-ph">&#128247; Photo of Chenny &mdash; warm, professional, natural light</div>
+      <div class="g3">
+        <div class="card">
+          <span class="card-icon">&#128161;</span>
+          <h4>Clarity first</h4>
+          <p>Honest diagnosis before any solution is prescribed. We start with truth, not assumptions.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">&#128200;</span>
+          <h4>Tangible results</h4>
+          <p>Every recommendation becomes a concrete, measurable action &mdash; not a theory.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">&#9854;</span>
+          <h4>Infinite growth</h4>
+          <p>We invest in the whole person, not just the business problem. Growth without a ceiling.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <blockquote class="quote-block">
+        &ldquo;The most powerful thing a consultant can offer is not just a plan &mdash; but the kind of thinking that changes how a leader sees themselves and their work.&rdquo;
+        <div class="quote-attr">&mdash; Chenny Galano, Founder</div>
+      </blockquote>
+    </div>
+
+    <div class="section">
+      <p class="slabel">What we do</p>
+      <div class="g2 mb12">
+        <div class="card"><h4>Strategy consulting</h4><p>Vision, direction, competitive positioning, and strategic road-mapping built for the long game.</p></div>
+        <div class="card"><h4>Marketing and branding</h4><p>Brand identity, messaging, digital strategy, and campaigns that make you impossible to ignore.</p></div>
+        <div class="card"><h4>Sales consulting</h4><p>Sales process design, team coaching, pipeline development, and revenue performance systems.</p></div>
+        <div class="card"><h4>Business development</h4><p>Partnerships, new revenue streams, stakeholder engagement, and scaling frameworks.</p></div>
+      </div>
+      <div class="flex-gap">
+        <div class="card" style="flex:1;border-left:3px solid var(--cfg-gold-bright)">
+          <span class="tag-gold mb10" style="display:inline-block">Signature programme</span>
+          <h4 class="mt6">Coaching for infinite growth</h4>
+          <p style="margin-top:4px">A transformational methodology for individuals committed to growing in character and professional life &mdash; without limit.</p>
+        </div>
+        <div class="card" style="flex:1;border-left:3px solid var(--cfg-purple-mid)">
+          <span class="tag-purple mb10" style="display:inline-block">Innovation practice</span>
+          <h4 class="mt6">Innovation sprint and program design</h4>
+          <p style="margin-top:4px">Structured sprints and programs that equip leaders to challenge assumptions and reimagine what&rsquo;s possible.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="text-align:center;padding:28px">
+      <p style="font-size:14px;color:var(--text-secondary);margin:0 0 14px;max-width:440px;margin-left:auto;margin-right:auto">Ready to close the gap? Let&rsquo;s talk about where you are and where you want to be.</p>
+      <button class="btn-primary">Book a free discovery call</button>
+    </div>
+
+    <div class="footer-strip">
+      <span class="foot-left">Change For Good Consulting &middot; Philippines</span>
+      <span class="foot-right">chenny@cfgconsultingph.com</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ ABOUT ═══ -->
+  <div id="page-about" class="page">
+
+    <div class="hero">
+      <p class="eyebrow">Meet the founder</p>
+      <h1>Chenny Galano &mdash; consultant, coach, and someone who has done the inner work herself.</h1>
+      <p>Change For Good Consulting was built from lived understanding: that strategy without self-awareness is incomplete, and that the most powerful growth happens when professional excellence and personal development are pursued together.</p>
+    </div>
+
+    <div class="section">
+      <div class="photo-ph">&#128247; Candid photo of Chenny &mdash; genuine, warm, in her element</div>
+      <p style="font-size:14px;color:var(--text-secondary);line-height:1.75;margin:0 0 14px">Chenny&rsquo;s path to founding Change For Good was not a straight line &mdash; and that is precisely what makes it credible. Grounded in Communication Arts and Advertising, her early career was shaped by print media and brand storytelling. She then moved through business development, customer service, account management, and non-profit leadership &mdash; capable and recognized, yet searching for something more aligned.</p>
+      <p style="font-size:14px;color:var(--text-secondary);line-height:1.75;margin:0">The turning point came through a personal mastery and coaching program that invited her to look inward. The answer was clear: her deepest aliveness lived in facilitation, education, and helping others grow. She enrolled in TRAIL&rsquo;s Executive Coaching Program &mdash; and rose to serve as President of the Rizal Academy for Innovation and Leadership, leading innovation programs and transformative learning experiences across the Philippines.</p>
+    </div>
+
+    <div class="section section-alt">
+      <blockquote class="quote-block">
+        &ldquo;My motivation has changed. I always have in mind how we will be able to support and impact more lives, organizations, and the society. I have a bigger vision &mdash; and it excites me to do the work over and over again.&rdquo;
+        <div class="quote-attr">&mdash; Chenny Galano</div>
+      </blockquote>
+    </div>
+
+    <div class="section">
+      <p class="slabel">Credentials and experience</p>
+      <div class="cred-item">
+        <span class="cred-icon">&#127891;</span>
+        <div><div class="cred-title">Executive Coach &mdash; TRAIL Executive Coaching Program (ECP)</div><div class="cred-sub">Certified coach and facilitator; invited to join as business development lead</div></div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">&#127979;</span>
+        <div><div class="cred-title">MBA &mdash; Miriam College SBEA, graduated with honors</div><div class="cred-sub">Best in Strategic Management Capstone Award recipient</div></div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">&#127970;</span>
+        <div><div class="cred-title">President &mdash; Rizal Academy for Innovation and Leadership (TRAIL)</div><div class="cred-sub">Led strategic initiatives, innovation programs, and transformative learning</div></div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">&#128101;</span>
+        <div><div class="cred-title">National Training Director &mdash; JCI Philippines (2016)</div><div class="cred-sub">JCI Manile&ntilde;a Chapter; training design, strategic management, community engagement</div></div>
+      </div>
+      <div class="cred-item">
+        <span class="cred-icon">&#9733;</span>
+        <div><div class="cred-title">Multiple coaching and consulting certifications</div><div class="cred-sub">Reflecting the same commitment to lifelong learning she brings to every client</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="slabel">How we work</p>
+      <div class="val-item">
+        <span style="font-size:20px;color:var(--cfg-gold);flex-shrink:0">&#128065;</span>
+        <div><div class="val-title">Integrity &mdash; we say the hard things, kindly</div><div class="val-body">Honest diagnosis before any solution is prescribed. We will never tell you what you want to hear at the expense of what you need to hear.</div></div>
+      </div>
+      <div class="val-item">
+        <span style="font-size:20px;color:var(--cfg-gold);flex-shrink:0">&#128737;</span>
+        <div><div class="val-title">Courage &mdash; we commit to measurable outcomes</div><div class="val-body">Every engagement ends not with a presentation but with a plan, a team aligned behind it, and people growing in skill and in character.</div></div>
+      </div>
+      <div class="val-item">
+        <span style="font-size:20px;color:var(--cfg-gold);flex-shrink:0">&#9854;</span>
+        <div><div class="val-title">Infinite growth &mdash; built with you, not handed down</div><div class="val-body">Solutions co-created with your team. We believe every person &mdash; and every business &mdash; holds more potential than they have yet discovered.</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ SERVICES ═══ -->
+  <div id="page-services" class="page">
+
+    <div class="hero">
+      <p class="eyebrow">What we offer</p>
+      <h1>Six ways to work with us &mdash; all built around your real situation.</h1>
+      <p>Whether you&rsquo;re a startup founder seeking traction, an SME ready to scale, or a leader committed to growing yourself and your team &mdash; there is an engagement designed for where you are right now.</p>
+    </div>
+
+    <div class="section">
+      <div class="svc-card featured">
+        <span class="tag-gold">Signature programme</span>
+        <div class="svc-title">Coaching for infinite growth</div>
+        <div class="svc-desc">A transformational methodology for individuals committed to growing in character and professional life &mdash; without limit. Covers personal values clarification, leadership character development, professional vision mapping, mindset and behavioral coaching, and accountability systems for sustained growth.</div>
+        <div class="svc-meta">Best for: executives, founders, and high-achievers ready to integrate personal excellence into professional impact</div>
+        <button class="btn-primary btn-sm">Inquire about this programme</button>
+      </div>
+
+      <div class="g2 mb12">
+        <div class="svc-card">
+          <span class="tag-purple">01</span>
+          <div class="svc-title">Strategy consulting</div>
+          <div class="svc-desc">Business vision and direction setting, competitive positioning, strategic planning, growth strategy, and organizational design. We turn ambition into a road map your team can actually follow.</div>
+        </div>
+        <div class="svc-card">
+          <span class="tag-purple">02</span>
+          <div class="svc-title">Marketing and branding</div>
+          <div class="svc-desc">Brand identity development, messaging and positioning, marketing strategy, digital marketing, and content strategy. We make sure the world sees what you truly are.</div>
+        </div>
+        <div class="svc-card">
+          <span class="tag-purple">03</span>
+          <div class="svc-title">Sales consulting</div>
+          <div class="svc-desc">Sales process design and optimization, team structure and coaching frameworks, pipeline development, customer acquisition and retention systems, and revenue performance reviews.</div>
+        </div>
+        <div class="svc-card">
+          <span class="tag-purple">04</span>
+          <div class="svc-title">Business development</div>
+          <div class="svc-desc">Partnership development, new revenue stream identification, stakeholder engagement strategies, proposal and pitch development, and scaling frameworks for growing businesses.</div>
+        </div>
+      </div>
+
+      <div class="svc-card" style="border-left:3px solid var(--cfg-purple-mid)">
+        <span class="tag-purple">Innovation practice</span>
+        <div class="svc-title">Innovation sprint and program design</div>
+        <div class="svc-desc">Structured innovation sprints and multi-phase programs using globally proven frameworks &mdash; ExO, Business Model Canvas, Design Thinking, De Bono&rsquo;s Six Thinking Hats, Systems Thinking, and Theory U. We equip leaders and teams to challenge assumptions and bring new ideas to life.</div>
+        <div class="svc-meta">Past work: innovation summit design, business model redesign workshops, strategic ideation and prototyping, ExO strategy and MTP alignment</div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <p class="slabel">How an engagement works</p>
+      <div class="step-row">
+        <div class="step-item"><div class="step-num">1</div><div class="step-title">Discovery call</div><div class="step-desc">Free conversation &mdash; we learn about your business and goals</div></div>
+        <div class="step-item"><div class="step-num">2</div><div class="step-title">Honest diagnosis</div><div class="step-desc">We assess where you are before proposing anything</div></div>
+        <div class="step-item"><div class="step-num">3</div><div class="step-title">Co-create the plan</div><div class="step-desc">Solutions built with your team, not handed down</div></div>
+        <div class="step-item"><div class="step-num">4</div><div class="step-title">Walk alongside</div><div class="step-desc">We stay with you through implementation &mdash; not just strategy</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="slabel">Who we serve</p>
+      <div class="g2">
+        <div class="card"><h4>SMEs</h4><p>Established businesses ready to sharpen strategy, strengthen brand, and build systems that turn ambition into sustainable growth.</p></div>
+        <div class="card"><h4>Startups</h4><p>Founders with a vision who need clarity, positioning, and go-to-market strategy to move from idea to traction with confidence.</p></div>
+        <div class="card"><h4>Social enterprises</h4><p>Mission-led organizations that need business rigour to match their social purpose &mdash; doing good and performing well are not a trade-off.</p></div>
+        <div class="card"><h4>Diverse organizations</h4><p>Organizations spanning multiple sectors who need an integrated consulting partner that can navigate complexity and deliver coherent strategy.</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ RESULTS ═══ -->
+  <div id="page-results" class="page">
+
+    <div class="hero">
+      <p class="eyebrow">Proven client results</p>
+      <h1>We don&rsquo;t measure success in deliverables. We measure it in change.</h1>
+      <p>From national institutions to growing enterprises &mdash; here is what working with Change For Good Consulting looks like in practice.</p>
+    </div>
+
+    <div class="section">
+      <div class="stat-row">
+        <div class="stat-box"><div class="stat-num">3+</div><div class="stat-lbl">major organizations transformed</div></div>
+        <div class="stat-box"><div class="stat-num">9</div><div class="stat-lbl">new strategic initiatives for PAL</div></div>
+        <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">commitment to measurable outcomes</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="slabel">Client case highlights</p>
+      <div class="result-card">
+        <div class="gold-bar"></div>
+        <div class="flex-between mb10"><div class="result-client">Philippine Airlines (PAL)</div><span class="tag-gold">Strategy</span></div>
+        <p class="result-body">Facilitated an innovation engagement that surfaced 9 new strategic initiatives, presented directly to senior leadership. The process challenged existing assumptions and opened new directions for the organization&rsquo;s growth trajectory.</p>
+      </div>
+      <div class="result-card">
+        <div class="gold-bar"></div>
+        <div class="flex-between mb10"><div class="result-client">YSU Group</div><span class="tag-gold">Business development</span></div>
+        <p class="result-body">Led a business model redesign process that identified new verticals and revenue streams, repositioning the organization for sustainable, diversified growth beyond its existing portfolio.</p>
+      </div>
+      <div class="result-card">
+        <div class="gold-bar"></div>
+        <div class="flex-between mb10"><div class="result-client">Bangko Sentral ng Pilipinas (BSP)</div><span class="tag-gold">Coaching</span></div>
+        <p class="result-body">Integrated Personal Mastery coaching within BSP&rsquo;s Lean Six Sigma program &mdash; helping participants grow not just in process proficiency but in self-awareness and leadership character.</p>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <p class="slabel">What clients say</p>
+      <div class="result-card mb12">
+        <div class="testimonial">
+          <div class="avatar">SE</div>
+          <div>
+            <div class="testi-quote">&ldquo;Working with Change For Good wasn&rsquo;t just about getting a plan &mdash; it was about becoming the kind of leader who could actually execute it. The shift in how I saw myself and my work was the real result.&rdquo;</div>
+            <div class="testi-attr">&mdash; Senior Executive, Financial Services</div>
+          </div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="testimonial">
+          <div class="avatar">FD</div>
+          <div>
+            <div class="testi-quote">&ldquo;Chenny has a rare ability to hold up a mirror without making you feel judged. The strategy work was excellent &mdash; but it was the coaching dimension that made it stick.&rdquo;</div>
+            <div class="testi-attr">&mdash; Founder, Social Enterprise &middot; Manila</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="text-align:center;padding:28px">
+      <p style="font-size:14px;color:var(--text-secondary);margin:0 0 14px">Your organization&rsquo;s story could be next.</p>
+      <button class="btn-primary">Let&rsquo;s talk about your goals</button>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ RESOURCES ═══ -->
+  <div id="page-resources" class="page">
+
+    <div class="hero">
+      <p class="eyebrow">Insights and tools</p>
+      <h1>Practical thinking for leaders who take growth seriously.</h1>
+      <p>Resources built from real consulting and coaching experience &mdash; not generic advice. For business owners, executives, and individuals committed to becoming their best.</p>
+    </div>
+
+    <div class="section">
+      <div class="download-banner">
+        <span class="dl-icon">&#11015;</span>
+        <div>
+          <span class="tag-gold" style="display:inline-block;margin-bottom:8px">Free download</span>
+          <div class="svc-title" style="margin-top:0">The clarity-first diagnostic &mdash; a self-assessment for leaders</div>
+          <div class="svc-desc">10 honest questions that reveal where your business strategy is strong, where it is fragile, and what to prioritize first. Used by leaders across the Philippines and beyond.</div>
+          <button class="btn-gold btn-sm">Download free guide</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="slabel">From the desk of Chenny</p>
+      <div class="g3">
+        <div class="art-card">
+          <div class="art-img">&#128247; Cover image</div>
+          <div class="art-body">
+            <span class="tag-purple" style="font-size:10px">Strategy</span>
+            <div class="art-title">Why most strategic plans fail before they start</div>
+            <div class="art-meta">5 min read</div>
+          </div>
+        </div>
+        <div class="art-card">
+          <div class="art-img">&#128247; Cover image</div>
+          <div class="art-body">
+            <span class="tag-purple" style="font-size:10px">Leadership</span>
+            <div class="art-title">The inner work that makes strategy stick</div>
+            <div class="art-meta">4 min read</div>
+          </div>
+        </div>
+        <div class="art-card">
+          <div class="art-img">&#128247; Cover image</div>
+          <div class="art-body">
+            <span class="tag-purple" style="font-size:10px">Growth</span>
+            <div class="art-title">Change for good &mdash; what continuous improvement really means</div>
+            <div class="art-meta">6 min read</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <p class="slabel">Stay connected</p>
+      <p style="font-size:14px;color:var(--text-secondary);line-height:1.7">One insight per month for leaders committed to growth &mdash; strategy, coaching, and the honest conversations most consultants avoid.</p>
+      <div class="newsletter-row">
+        <input type="email" placeholder="your@email.com">
+        <button class="btn-primary btn-sm" style="white-space:nowrap">Subscribe</button>
+      </div>
+      <div class="trust-note">&#128274; No spam. Unsubscribe anytime. Your information is never shared.</div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ CONTACT ═══ -->
+  <div id="page-contact" class="page">
+
+    <div class="hero">
+      <p class="eyebrow">Let&rsquo;s start a conversation</p>
+      <h1>We would love to learn about your business and explore how we can help.</h1>
+      <p>Reach out &mdash; no sales pitch, no pressure. Just an honest conversation about where you are, where you want to be, and whether Change For Good Consulting is the right partner for that journey.</p>
+    </div>
+
+    <div class="section">
+      <div class="g2" style="align-items:start">
+        <div>
+          <div class="form-field"><label>Your name</label><input type="text" placeholder="Juan dela Cruz"></div>
+          <div class="form-field"><label>Email address</label><input type="email" placeholder="juan@yourcompany.com"></div>
+          <div class="form-field"><label>Organization</label><input type="text" placeholder="Company name or &lsquo;Individual&rsquo;"></div>
+          <div class="form-field"><label>What are you working through?</label><textarea placeholder="Tell us about your situation &mdash; your goals, your challenges, and what kind of support you&rsquo;re looking for..."></textarea></div>
+          <div class="form-field">
+            <label>Service area of interest</label>
+            <select>
+              <option>Strategy consulting</option>
+              <option>Marketing and branding</option>
+              <option>Sales consulting</option>
+              <option>Business development</option>
+              <option>Coaching for infinite growth</option>
+              <option>Innovation sprint and program design</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <button class="btn-primary w100">Send message</button>
+          <div class="trust-note">&#128274; Your details are never shared or sold.</div>
+        </div>
+        <div>
+          <div class="card mb12">
+            <p class="slabel" style="margin-bottom:10px">What happens next</p>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;gap:10px;align-items:flex-start"><div class="step-num" style="flex-shrink:0">1</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.55">You&rsquo;ll receive a confirmation within minutes of submitting.</div></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><div class="step-num" style="flex-shrink:0">2</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.55">Chenny personally reviews every inquiry and responds within 24 hours.</div></div>
+              <div style="display:flex;gap:10px;align-items:flex-start"><div class="step-num" style="flex-shrink:0">3</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.55">We schedule a free discovery call &mdash; relaxed, no obligation, just honest conversation.</div></div>
+            </div>
+          </div>
+          <div class="card mb12">
+            <p class="slabel" style="margin-bottom:12px">Reach us directly</p>
+            <div class="contact-info-row"><span class="contact-info-icon">&#128222;</span>09178086881 &middot; calls, WhatsApp and Viber</div>
+            <div class="contact-info-row"><span class="contact-info-icon">&#9993;</span>chenny@cfgconsultingph.com</div>
+            <div class="contact-info-row"><span class="contact-info-icon">&#128279;</span>linkedin.com/in/chenny-galano</div>
+            <div class="contact-info-row"><span class="contact-info-icon">&#128205;</span>Philippines &middot; working globally</div>
+          </div>
+          <div style="background:var(--cfg-purple-light);border-radius:10px;padding:14px">
+            <blockquote class="quote-block" style="font-size:13px">
+              &ldquo;We don&rsquo;t just advise &mdash; we walk alongside you in the hard work of becoming what your business, and your people, were always meant to be.&rdquo;
+              <div class="quote-attr">&mdash; Change For Good Consulting</div>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-strip">
+      <span class="foot-left">&copy; Change For Good Consulting &middot; Strategies that transform. Results that endure.</span>
+      <span class="foot-right">Change. For Good.</span>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,413 @@
+
+<style>
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--surface-2);border-bottom:0.5px solid var(--border);border-radius:12px 12px 0 0}
+.nav-logo{font-size:14px;font-weight:500;color:var(--text-primary)}
+.nav-links{display:flex;gap:4px}
+.nav-btn{padding:5px 10px;font-size:12px;border:none;background:none;color:var(--text-secondary);cursor:pointer;border-radius:var(--radius);transition:all .12s}
+.nav-btn:hover,.nav-btn.active{background:var(--surface-1);color:var(--text-primary)}
+.nav-btn.active{font-weight:500}
+.page{background:var(--surface-1);border:0.5px solid var(--border);border-top:none;border-radius:0 0 12px 12px;display:none;padding:0}
+.page.active{display:block}
+.hero{padding:32px 24px 24px;border-bottom:0.5px solid var(--border)}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-accent);margin:0 0 10px}
+.hero h1{font-size:22px;font-weight:500;line-height:1.3;margin:0 0 12px;color:var(--text-primary)}
+.hero p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin:0 0 16px;max-width:420px}
+.hero-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn-primary{padding:8px 18px;font-size:13px;font-weight:500;background:var(--text-primary);color:var(--surface-2);border:none;border-radius:var(--radius);cursor:pointer}
+.btn-outline{padding:8px 18px;font-size:13px;background:none;border:0.5px solid var(--border-strong);color:var(--text-secondary);border-radius:var(--radius);cursor:pointer}
+.photo-placeholder{width:100%;height:80px;background:var(--surface-0);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted);border:0.5px dashed var(--border-strong);margin-bottom:16px}
+.section{padding:20px 24px;border-bottom:0.5px solid var(--border)}
+.section:last-child{border-bottom:none}
+.section-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin:0 0 12px}
+.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.card-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mini-card{background:var(--surface-2);border:0.5px solid var(--border);border-radius:10px;padding:12px}
+.mini-card-icon{font-size:18px;color:var(--text-accent);margin-bottom:6px}
+.mini-card h4{font-size:13px;font-weight:500;margin:0 0 4px;color:var(--text-primary)}
+.mini-card p{font-size:12px;color:var(--text-secondary);margin:0;line-height:1.5}
+.proof-strip{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.proof-logo{font-size:11px;font-weight:500;color:var(--text-muted);padding:4px 10px;border:0.5px solid var(--border);border-radius:var(--radius)}
+.quote-block{background:var(--surface-2);border-left:2px solid var(--border-accent);border-radius:0 8px 8px 0;padding:12px 14px;font-size:13px;font-style:italic;color:var(--text-secondary);line-height:1.6;margin:0}
+.quote-attr{font-size:12px;color:var(--text-muted);margin-top:6px;font-style:normal}
+.stat-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat-box{background:var(--surface-2);border:0.5px solid var(--border);border-radius:10px;padding:12px;text-align:center}
+.stat-num{font-size:22px;font-weight:500;color:var(--text-primary)}
+.stat-lbl{font-size:11px;color:var(--text-muted);margin-top:2px}
+.step-row{display:flex;gap:0;align-items:flex-start;position:relative}
+.step-item{flex:1;text-align:center;padding:0 8px}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--bg-accent);color:var(--text-accent);font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;margin:0 auto 6px}
+.step-title{font-size:12px;font-weight:500;color:var(--text-primary);margin:0 0 2px}
+.step-desc{font-size:11px;color:var(--text-secondary);line-height:1.4}
+.step-line{position:absolute;top:14px;left:calc(50% / 3 + 14px);right:calc(50% / 3 + 14px);height:0.5px;background:var(--border-strong)}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;background:var(--bg-accent);color:var(--text-accent);font-weight:500}
+.article-card{background:var(--surface-2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
+.article-img{height:50px;background:var(--surface-0);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted)}
+.article-body{padding:10px 12px}
+.form-field{margin-bottom:10px}
+.form-field label{display:block;font-size:12px;color:var(--text-secondary);margin-bottom:4px}
+.form-field input,.form-field textarea,.form-field select{width:100%;font-size:13px;box-sizing:border-box}
+.form-field textarea{height:70px;resize:none}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--bg-accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--text-accent);flex-shrink:0}
+.testimonial{display:flex;gap:10px;align-items:flex-start}
+.trust-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);margin-top:8px}
+.cred-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:0.5px solid var(--border)}
+.cred-item:last-child{border-bottom:none}
+.value-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:0.5px solid var(--border)}
+.value-item:last-child{border-bottom:none}
+</style>
+
+<h2 class="sr-only">Interactive website mockup for a professional services firm, with copy for all 6 tabs: Home, About, Services, Results, Resources, and Contact.</h2>
+
+<div style="border-radius:12px;border:0.5px solid var(--border);overflow:hidden;margin:1rem 0">
+
+<div class="nav">
+  <span class="nav-logo">Clara Reyes Consulting</span>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showPage('home',this)">Home</button>
+    <button class="nav-btn" onclick="showPage('about',this)">About</button>
+    <button class="nav-btn" onclick="showPage('services',this)">Services</button>
+    <button class="nav-btn" onclick="showPage('results',this)">Results</button>
+    <button class="nav-btn" onclick="showPage('resources',this)">Resources</button>
+    <button class="nav-btn" onclick="showPage('contact',this)">Contact</button>
+  </div>
+</div>
+
+<div id="page-home" class="page active">
+  <div class="hero">
+    <p class="hero-eyebrow">Business and leadership consulting</p>
+    <h1>Clarity for leaders who are ready to move forward</h1>
+    <p>I help founders, executives, and professionals make confident decisions — in their careers, their businesses, and their lives. No fluff. Just clear thinking and a practical plan.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">Book a free 20-min call</button>
+      <button class="btn-outline">See how I work</button>
+    </div>
+  </div>
+  <div class="section">
+    <div class="photo-placeholder"><i class="ti ti-user-circle" aria-hidden="true" style="font-size:20px;margin-right:6px"></i>Your photo here — natural light, genuine expression</div>
+    <div class="proof-strip">
+      <span style="font-size:11px;color:var(--text-muted)">As featured in</span>
+      <span class="proof-logo">Forbes</span>
+      <span class="proof-logo">Inc. Magazine</span>
+      <span class="proof-logo">Business Insider</span>
+      <span class="proof-logo">LinkedIn News</span>
+    </div>
+  </div>
+  <div class="section">
+    <p class="section-label">What I help with</p>
+    <div class="card-grid">
+      <div class="mini-card">
+        <i class="ti ti-target mini-card-icon" aria-hidden="true"></i>
+        <h4>Strategic clarity</h4>
+        <p>Cut through the noise and get clear on what actually matters for your next move.</p>
+      </div>
+      <div class="mini-card">
+        <i class="ti ti-chart-line mini-card-icon" aria-hidden="true"></i>
+        <h4>Business growth</h4>
+        <p>Build systems and strategies that scale without burning you out.</p>
+      </div>
+      <div class="mini-card">
+        <i class="ti ti-shield-check mini-card-icon" aria-hidden="true"></i>
+        <h4>Confident decisions</h4>
+        <p>Work through complex choices with a clear framework, not guesswork.</p>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <blockquote class="quote-block">
+      "Clara helped me go from spinning my wheels for two years to launching my most profitable quarter ever — in 90 days."
+      <div class="quote-attr">— Marcus T., CEO, Fintech startup</div>
+    </blockquote>
+  </div>
+  <div class="section" style="text-align:center;padding:24px">
+    <p style="font-size:13px;color:var(--text-secondary);margin:0 0 12px">Ready to stop second-guessing and start moving?</p>
+    <button class="btn-primary">Book your free call</button>
+  </div>
+</div>
+
+<div id="page-about" class="page">
+  <div class="hero">
+    <h1>I've been where you are</h1>
+    <p>After 15 years leading teams at Fortune 500 companies — and then building two businesses of my own — I learned that most stuck moments aren't about strategy. They're about clarity. I became a consultant because I wanted to give people the outside perspective I wish I'd had.</p>
+  </div>
+  <div class="section">
+    <div class="photo-placeholder"><i class="ti ti-camera" aria-hidden="true" style="font-size:18px;margin-right:6px"></i>Candid photo — at your desk or in a relaxed setting</div>
+    <p style="font-size:13px;color:var(--text-secondary);line-height:1.6;margin:0">Today I work with executives, founders, and high-achievers across industries who are navigating career pivots, building new ventures, or scaling teams. My clients aren't stuck because they're not smart — they're stuck because they're too close to the problem. That's where I come in.</p>
+  </div>
+  <div class="section">
+    <p class="section-label">Credentials</p>
+    <div class="cred-item">
+      <i class="ti ti-certificate" aria-hidden="true" style="font-size:16px;color:var(--text-accent);flex-shrink:0;margin-top:1px"></i>
+      <div><div style="font-size:13px;font-weight:500;color:var(--text-primary)">Certified Executive Coach (ICF-PCC)</div><div style="font-size:12px;color:var(--text-muted)">International Coaching Federation, 2018</div></div>
+    </div>
+    <div class="cred-item">
+      <i class="ti ti-school" aria-hidden="true" style="font-size:16px;color:var(--text-accent);flex-shrink:0;margin-top:1px"></i>
+      <div><div style="font-size:13px;font-weight:500;color:var(--text-primary)">MBA, Wharton School of Business</div><div style="font-size:12px;color:var(--text-muted)">University of Pennsylvania</div></div>
+    </div>
+    <div class="cred-item">
+      <i class="ti ti-building" aria-hidden="true" style="font-size:16px;color:var(--text-accent);flex-shrink:0;margin-top:1px"></i>
+      <div><div style="font-size:13px;font-weight:500;color:var(--text-primary)">15 years corporate leadership</div><div style="font-size:12px;color:var(--text-muted)">VP roles at McKinsey, Deloitte, and Google</div></div>
+    </div>
+    <div class="cred-item">
+      <i class="ti ti-users" aria-hidden="true" style="font-size:16px;color:var(--text-accent);flex-shrink:0;margin-top:1px"></i>
+      <div><div style="font-size:13px;font-weight:500;color:var(--text-primary)">300+ clients across 14 countries</div><div style="font-size:12px;color:var(--text-muted)">Since 2015</div></div>
+    </div>
+  </div>
+  <div class="section">
+    <p class="section-label">How I work</p>
+    <div class="value-item">
+      <i class="ti ti-eye" aria-hidden="true" style="font-size:18px;color:var(--text-accent);flex-shrink:0"></i>
+      <div><div style="font-size:13px;font-weight:500;color:var(--text-primary);margin-bottom:3px">Honest, not comfortable</div><div style="font-size:12px;color:var(--text-secondary);line-height:1.5">I'll tell you what you need to hear, not what you want to. That's what actually moves things forward.</div></div>
+    </div>
+    <div class="value-item">
+      <i class="ti ti-puzzle" aria-hidden="true" style="font-size:18px;color:var(--text-accent);flex-shrink:0"></i>
+      <div><div style="font-size:13px;font-weight:500;color:var(--text-primary);margin-bottom:3px">Practical, not theoretical</div><div style="font-size:12px;color:var(--text-secondary);line-height:1.5">Every session ends with a clear next step. No vague frameworks — just action you can take this week.</div></div>
+    </div>
+    <div class="value-item">
+      <i class="ti ti-heart" aria-hidden="true" style="font-size:18px;color:var(--text-accent);flex-shrink:0"></i>
+      <div><div style="font-size:13px;font-weight:500;color:var(--text-primary);margin-bottom:3px">Invested in your outcome</div><div style="font-size:12px;color:var(--text-secondary);line-height:1.5">Your success is my track record. I stay engaged between sessions and celebrate every win with you.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="page-services" class="page">
+  <div class="hero">
+    <h1>Work with me</h1>
+    <p>Whether you're navigating a career crossroads, scaling a business, or building a team — there's an engagement designed for where you are right now.</p>
+  </div>
+  <div class="section">
+    <p class="section-label">Choose your path</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="mini-card" style="border:2px solid var(--border-accent)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+          <div>
+            <span class="tag">Most popular</span>
+            <h4 style="margin:6px 0 0;font-size:14px">90-day clarity intensive</h4>
+          </div>
+          <span style="font-size:13px;font-weight:500;color:var(--text-primary)">$4,500</span>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);margin:0 0 10px;line-height:1.5">For founders and executives who need focused momentum. Weekly 60-min sessions, a personalised action plan, and unlimited email support. Ideal for career transitions, business pivots, and high-stakes decisions.</p>
+        <button class="btn-primary" style="font-size:12px;padding:6px 14px">Apply for this programme</button>
+      </div>
+      <div class="card-grid-2">
+        <div class="mini-card">
+          <h4>Strategy day</h4>
+          <p style="font-size:12px;margin:4px 0 8px">A full-day working session to map out your next 12 months. Leave with a clear strategy and priorities.</p>
+          <div style="font-size:12px;font-weight:500;color:var(--text-primary)">$1,800</div>
+        </div>
+        <div class="mini-card">
+          <h4>Monthly retainer</h4>
+          <p style="font-size:12px;margin:4px 0 8px">Ongoing support for leaders who want a trusted thinking partner. Two sessions per month.</p>
+          <div style="font-size:12px;font-weight:500;color:var(--text-primary)">$2,200/mo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <p class="section-label">How it works</p>
+    <div class="step-row">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-title">Free call</div>
+        <div class="step-desc">We meet for 20 minutes to see if we're a good fit</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-title">Intake</div>
+        <div class="step-desc">You complete a short questionnaire before session one</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-title">We begin</div>
+        <div class="step-desc">First session maps your current situation and goals</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-title">Results</div>
+        <div class="step-desc">You take action — and I'm with you every step</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <p class="section-label">Common questions</p>
+    <div style="font-size:13px;color:var(--text-secondary);line-height:1.7">
+      <p style="margin:0 0 8px"><span style="font-weight:500;color:var(--text-primary)">Do you work with people outside the Philippines?</span><br>Yes — all sessions are conducted via video call. I work with clients in Asia, the US, Europe, and beyond.</p>
+      <p style="margin:0 0 8px"><span style="font-weight:500;color:var(--text-primary)">What industries do you work with?</span><br>Primarily professional services, tech, and finance — but the principles apply across industries. If you're unsure, book a free call.</p>
+      <p style="margin:0"><span style="font-weight:500;color:var(--text-primary)">How quickly will I see results?</span><br>Most clients notice a shift in clarity and confidence within the first two sessions. Measurable business outcomes typically appear within 30–60 days.</p>
+    </div>
+  </div>
+</div>
+
+<div id="page-results" class="page">
+  <div class="hero">
+    <h1>What clients say</h1>
+    <p>Results that speak for themselves — from people who were exactly where you are now.</p>
+  </div>
+  <div class="section">
+    <div class="stat-row" style="margin-bottom:16px">
+      <div class="stat-box"><div class="stat-num">300+</div><div class="stat-lbl">clients served</div></div>
+      <div class="stat-box"><div class="stat-num">97%</div><div class="stat-lbl">satisfaction rate</div></div>
+      <div class="stat-box"><div class="stat-num">11 yrs</div><div class="stat-lbl">in practice</div></div>
+    </div>
+  </div>
+  <div class="section">
+    <p class="section-label">Client stories</p>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="mini-card">
+        <div class="testimonial">
+          <div class="avatar">MT</div>
+          <div>
+            <div style="font-size:12px;font-weight:500;color:var(--text-primary)">Marcus T. — CEO, fintech startup</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">90-day clarity intensive</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;font-style:italic">"I was about to take a VC deal that would have cost me control of my company. Clara helped me see the full picture — and negotiate a far better structure. That conversation was worth ten times the investment."</div>
+          </div>
+        </div>
+      </div>
+      <div class="mini-card">
+        <div class="testimonial">
+          <div class="avatar">SL</div>
+          <div>
+            <div style="font-size:12px;font-weight:500;color:var(--text-primary)">Sofia L. — VP of Marketing, MNC</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Monthly retainer</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;font-style:italic">"After 18 months of feeling stuck in my career, I finally had the confidence to go for the regional director role — and I got it. Clara's approach is rigorous and genuinely kind."</div>
+          </div>
+        </div>
+      </div>
+      <div class="mini-card">
+        <div class="testimonial">
+          <div class="avatar">JA</div>
+          <div>
+            <div style="font-size:12px;font-weight:500;color:var(--text-primary)">James A. — Founder, e-commerce brand</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Strategy day</div>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;font-style:italic">"We used to make decisions by gut feel. After our strategy day, we had a 12-month plan everyone on the team understood and believed in. Revenue grew 40% in the following quarter."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="page-resources" class="page">
+  <div class="hero">
+    <h1>Tools and insights — free</h1>
+    <p>Practical reads and resources for professionals who think seriously about their work and their future.</p>
+  </div>
+  <div class="section">
+    <div class="mini-card" style="display:flex;gap:14px;align-items:center;border:2px solid var(--border-accent)">
+      <i class="ti ti-download" aria-hidden="true" style="font-size:28px;color:var(--text-accent);flex-shrink:0"></i>
+      <div>
+        <span class="tag" style="margin-bottom:6px;display:inline-block">Free download</span>
+        <h4 style="margin:0 0 4px;font-size:14px">The 5-question clarity framework</h4>
+        <p style="font-size:12px;color:var(--text-secondary);margin:0 0 10px;line-height:1.5">A one-page PDF used by 2,000+ professionals to get unstuck on any decision in 30 minutes or less.</p>
+        <button class="btn-primary" style="font-size:12px;padding:6px 14px">Download free guide</button>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <p class="section-label">Latest articles</p>
+    <div class="card-grid">
+      <div class="article-card">
+        <div class="article-img"><i class="ti ti-photo" aria-hidden="true"></i></div>
+        <div class="article-body">
+          <span class="tag" style="font-size:10px;margin-bottom:6px;display:inline-block">Career</span>
+          <div style="font-size:12px;font-weight:500;color:var(--text-primary);line-height:1.4;margin-bottom:4px">The real reason smart people stay stuck</div>
+          <div style="font-size:11px;color:var(--text-muted)">5 min read</div>
+        </div>
+      </div>
+      <div class="article-card">
+        <div class="article-img"><i class="ti ti-photo" aria-hidden="true"></i></div>
+        <div class="article-body">
+          <span class="tag" style="font-size:10px;margin-bottom:6px;display:inline-block">Leadership</span>
+          <div style="font-size:12px;font-weight:500;color:var(--text-primary);line-height:1.4;margin-bottom:4px">How to have the conversation you've been avoiding</div>
+          <div style="font-size:11px;color:var(--text-muted)">4 min read</div>
+        </div>
+      </div>
+      <div class="article-card">
+        <div class="article-img"><i class="ti ti-photo" aria-hidden="true"></i></div>
+        <div class="article-body">
+          <span class="tag" style="font-size:10px;margin-bottom:6px;display:inline-block">Growth</span>
+          <div style="font-size:12px;font-weight:500;color:var(--text-primary);line-height:1.4;margin-bottom:4px">Why your 5-year plan is probably wrong</div>
+          <div style="font-size:11px;color:var(--text-muted)">6 min read</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <p class="section-label">Weekly newsletter</p>
+    <p style="font-size:13px;color:var(--text-secondary);margin:0 0 10px">One insight per week for leaders who want to keep growing. No fluff, no selling — just practical thinking.</p>
+    <div style="display:flex;gap:8px">
+      <input type="email" placeholder="your@email.com" style="flex:1;font-size:13px">
+      <button class="btn-primary" style="white-space:nowrap;font-size:13px">Subscribe</button>
+    </div>
+  </div>
+</div>
+
+<div id="page-contact" class="page">
+  <div class="hero">
+    <h1>Let's talk</h1>
+    <p>Book a free 20-minute call. No pitch, no pressure — just a conversation to see if working together makes sense for you.</p>
+  </div>
+  <div class="section">
+    <div class="card-grid-2" style="gap:16px;align-items:start">
+      <div>
+        <div class="form-field">
+          <label>Your name</label>
+          <input type="text" placeholder="Maria Santos">
+        </div>
+        <div class="form-field">
+          <label>Email address</label>
+          <input type="email" placeholder="maria@company.com">
+        </div>
+        <div class="form-field">
+          <label>What's on your mind?</label>
+          <textarea placeholder="Tell me a little about where you are and what you're working through..."></textarea>
+        </div>
+        <div class="form-field">
+          <label>How did you find me?</label>
+          <select><option>LinkedIn</option><option>Google search</option><option>Referral</option><option>Other</option></select>
+        </div>
+        <button class="btn-primary" style="width:100%">Send message</button>
+        <div class="trust-row"><i class="ti ti-lock" aria-hidden="true" style="font-size:13px"></i>Your details are never shared or sold.</div>
+      </div>
+      <div>
+        <div class="mini-card" style="margin-bottom:10px">
+          <p class="section-label" style="margin-bottom:8px">What happens next</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:8px;align-items:flex-start">
+              <div class="step-num" style="flex-shrink:0">1</div>
+              <div style="font-size:12px;color:var(--text-secondary);line-height:1.5">You'll receive a confirmation email within a few minutes.</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:flex-start">
+              <div class="step-num" style="flex-shrink:0">2</div>
+              <div style="font-size:12px;color:var(--text-secondary);line-height:1.5">I'll personally reply within 24 hours with available times.</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:flex-start">
+              <div class="step-num" style="flex-shrink:0">3</div>
+              <div style="font-size:12px;color:var(--text-secondary);line-height:1.5">We meet for a 20-minute intro call — relaxed, no sales pressure.</div>
+            </div>
+          </div>
+        </div>
+        <div class="mini-card">
+          <p class="section-label" style="margin-bottom:8px">Prefer to book directly?</p>
+          <button class="btn-outline" style="width:100%;font-size:12px"><i class="ti ti-calendar" aria-hidden="true" style="font-size:13px;margin-right:4px"></i>Open my calendar</button>
+          <div style="margin-top:12px;font-size:12px;color:var(--text-muted);line-height:1.6">
+            <div><i class="ti ti-mail" aria-hidden="true" style="font-size:13px;margin-right:4px"></i>clara@clarareyes.com</div>
+            <div style="margin-top:4px"><i class="ti ti-brand-linkedin" aria-hidden="true" style="font-size:13px;margin-right:4px"></i>linkedin.com/in/clarareyes</div>
+            <div style="margin-top:4px"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:13px;margin-right:4px"></i>Manila, Philippines — working globally</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>

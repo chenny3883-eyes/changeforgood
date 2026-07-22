@@ -152,6 +152,20 @@ export default function ClarityDiagnostic({ onBack }: { onBack: () => void }) {
     setResults({ total, profile, areaScores });
     setScreen('results');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Save submission silently
+    fetch('/api/diagnostic', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        total,
+        profile: profile.name,
+        areaScores: areaScoreNums,
+        answers,
+      }),
+    }).catch(() => {/* silent fail */});
   }
 
   function retake() {

@@ -17,27 +17,30 @@ export default function Nav() {
 
   return (
     <nav className="nav">
-      <div className="nav-logo">
-        <span className="nav-logo-main">
-          Change For <span>Good</span> Consulting
-        </span>
-        <span className="nav-logo-sub">Strategies that transform. Results that endure.</span>
+      <div className="nav-left">
+        <div className="nav-logo">
+          <span className="nav-logo-main">
+            Change For <span>Good</span> Consulting
+          </span>
+          <span className="nav-logo-sub">Strategies that transform. Results that endure.</span>
+        </div>
+        <div className="nav-links">
+          {links.map(({ href, label }) => {
+            const isActive =
+              href === '/' ? pathname === '/' : pathname.startsWith(href);
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`nav-btn${isActive ? ' active' : ''}`}
+              >
+                {label}
+              </Link>
+            );
+          })}
+        </div>
       </div>
-      <div className="nav-links">
-        {links.map(({ href, label }) => {
-          const isActive =
-            href === '/' ? pathname === '/' : pathname.startsWith(href);
-          return (
-            <Link
-              key={href}
-              href={href}
-              className={`nav-btn${isActive ? ' active' : ''}`}
-            >
-              {label}
-            </Link>
-          );
-        })}
-      </div>
+      <img src="/photos/cfg-logo-transparent.png" alt="Change For Good Consulting" className="nav-logo-img" />
     </nav>
   );
 }

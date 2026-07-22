@@ -13,6 +13,9 @@ out/
 # OS files
 .DS_Store
 
+# submission data (created at runtime, not committed)
+data/*.csv
+
 # debug logs
 npm-debug.log*
 yarn-debug.log*

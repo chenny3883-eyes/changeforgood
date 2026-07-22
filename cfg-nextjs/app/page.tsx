@@ -21,33 +21,25 @@ export default function HomePage() {
             </button>
           </div>
         </div>
-        <div className="hero-logo-panel">
-          <img src="/photos/cfg-logo.png" alt="Change For Good Consulting" style={{ width: '100%', maxWidth: '280px', display: 'block' }} />
-        </div>
       </div>
 
-      <div className="proof-strip">
-        <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Clients include</span>
-        <span className="proof-logo">PAL</span>
-        <span className="proof-logo">YSU Group</span>
-        <span className="proof-logo">BSP</span>
-        <span className="proof-logo">JCI Philippines</span>
-      </div>
 
       <div className="section">
         <div className="g3">
           <div className="card">
-            <span className="card-icon">&#128161;</span>
+            <div style={{ width: '64px', height: '64px', borderRadius: '12px', background: 'linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '8px', padding: '6px' }}>
+              <img src="/photos/clarity-first.png" alt="Clarity First" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            </div>
             <h4>Clarity first</h4>
             <p>Honest diagnosis before any solution is prescribed. We start with truth, not assumptions.</p>
           </div>
           <div className="card">
-            <span className="card-icon">&#128200;</span>
+            <img src="/photos/tangible-results.png" alt="Tangible Results" style={{ width: '56px', height: '56px', objectFit: 'contain', marginBottom: '8px' }} />
             <h4>Tangible results</h4>
             <p>Every recommendation becomes a concrete, measurable action &mdash; not a theory.</p>
           </div>
           <div className="card">
-            <span className="card-icon">&#9854;</span>
+            <img src="/photos/infinite-growth.png" alt="Infinite Growth" style={{ width: '56px', height: '56px', objectFit: 'contain', marginBottom: '8px' }} />
             <h4>Infinite growth</h4>
             <p>We invest in the whole person, not just the business problem. Growth without a ceiling.</p>
           </div>
@@ -111,7 +103,7 @@ export default function HomePage() {
         <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: '0 0 14px', maxWidth: '440px', marginLeft: 'auto', marginRight: 'auto' }}>
           Ready to close the gap? Let&rsquo;s talk about where you are and where you want to be.
         </p>
-        <button className="btn-primary">Book a free discovery call</button>
+        <a href="/contact"><button className="btn-primary">Book a free discovery call</button></a>
       </div>
 
       <div className="footer-strip">

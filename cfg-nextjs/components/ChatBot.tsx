@@ -3,13 +3,11 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
-// ── TYPES ─────────────────────────────────────────────────────
 type ChatStep =
   | 'idle'
   | 'ask-name'
   | 'ask-challenge'
   | 'ask-context'
-  | 'ask-explore'
   | 'ask-email-soft'
   | 'ask-email'
   | 'closing'
@@ -21,220 +19,270 @@ interface ChatData {
   challenge: string;
   context: string;
   email: string;
+  recommendation: string;
 }
 
-interface QROption {
-  v: string;
-  l: string;
-}
-
+interface QROption { v: string; l: string; }
 type MessageRole = 'bot' | 'user';
-
-interface Message {
-  id: number;
-  role: MessageRole;
-  text: string;
-}
-
-interface TypingState {
-  active: boolean;
-}
+interface Message { id: number; role: MessageRole; text: string; }
 
 let msgId = 0;
+
+const REC_MAP: Record<string, { service: string; note: string }> = {
+  strategy:   { service: 'Strategy Consulting',             note: "We start with an honest diagnosis — no assumptions, no pre-packaged answers. Just a clear picture of where you are and a road map built specifically for you." },
+  alignment:  { service: 'Leadership Alignment & Coaching', note: "The goal is a team that moves in the same direction — with shared clarity on purpose, values, and what success actually looks like." },
+  growth:     { service: 'Business Development',            note: "We'll map the gap between where you are and the growth you're aiming for — and build a realistic path to get there." },
+  coaching:   { service: 'Coaching for Infinite Growth',    note: "This is one of Chenny's most personal offerings — built around the belief that real professional growth and personal growth cannot be separated." },
+  innovation: { service: 'Innovation Sprint & Program Design', note: "We use structured methodologies like ExO and Design Thinking to help your team challenge assumptions and bring real ideas to life." },
+  default:    { service: 'Change For Good Consulting',      note: "Chenny will find the right fit based on where you are right now. Every engagement starts with listening — not a pitch." },
+};
+
+function getRec(challenge: string) {
+  return REC_MAP[challenge] ?? REC_MAP.default;
+}
 
 export default function ChatBot() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [quickReplies, setQuickReplies] = useState<QROption[]>([]);
-  const [typing, setTyping] = useState<TypingState>({ active: false });
+  const [typing, setTyping] = useState(false);
   const [inputVal, setInputVal] = useState('');
 
   const stepRef = useRef<ChatStep>('idle');
-  const dataRef = useRef<ChatData>({ name: '', challenge: '', context: '', email: '' });
+  const dataRef = useRef<ChatData>({ name: '', challenge: '', context: '', email: '', recommendation: '' });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, typing, quickReplies]);
 
-  // ── HELPERS ─────────────────────────────────────────────────
   function addMsg(role: MessageRole, text: string) {
     setMessages(prev => [...prev, { id: ++msgId, role, text }]);
   }
 
-  const botTypeThen = useCallback((text: string, qrs?: QROption[]) => {
+  const botSay = useCallback((text: string, qrs?: QROption[]) => {
     setQuickReplies([]);
-    setTyping({ active: true });
-    const delay = Math.min(600 + text.length * 12, 2200);
+    setTyping(true);
+    const delay = Math.min(500 + text.length * 10, 2000);
     setTimeout(() => {
-      setTyping({ active: false });
+      setTyping(false);
       addMsg('bot', text);
       if (qrs) setQuickReplies(qrs);
     }, delay);
   }, []);
 
-  // ── OPEN / CLOSE ────────────────────────────────────────────
+  function saveLead() {
+    const d = dataRef.current;
+    if (!d.name || !d.email) return;
+    fetch('/api/chatbot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: d.name,
+        email: d.email,
+        challenge: d.challenge,
+        context: d.context,
+        recommendation: d.recommendation,
+      }),
+    }).catch(() => {/* silent */});
+  }
+
   const openChat = useCallback(() => {
     setOpen(true);
     if (stepRef.current === 'idle') {
       stepRef.current = 'ask-name';
       setTimeout(() => {
-        botTypeThen("Hi there! I'm the Change For Good assistant — here to help you find the right path forward.\n\nTo start, what's your name?");
-      }, 400);
+        botSay("Hi! I'm the Change For Good assistant — here to help you find the right path forward.\n\nWhat's your name?");
+      }, 350);
     }
-  }, [botTypeThen]);
+  }, [botSay]);
 
-  function closeChat() {
-    setOpen(false);
-  }
+  function closeChat() { setOpen(false); }
 
-  // Listen for global open event (from Home page button)
   useEffect(() => {
     const handler = () => openChat();
     window.addEventListener('cfg:openChat', handler);
     return () => window.removeEventListener('cfg:openChat', handler);
   }, [openChat]);
 
-  // ── RECOMMENDATION MAP ────────────────────────────────────
-  function getRecommendation(): { service: string; note: string } {
-    const c = dataRef.current.challenge;
-    if (c === 'strategy')   return { service: 'Strategy Consulting',             note: "We'll start with an honest diagnosis of where things are before prescribing anything." };
-    if (c === 'alignment')  return { service: 'Leadership Alignment & Coaching', note: "The goal is a team that moves in the same direction — without Chenny having to push." };
-    if (c === 'growth')     return { service: 'Business Development',            note: "We'll map the gap between where you are and the growth you're aiming for." };
-    if (c === 'coaching')   return { service: 'Coaching for Infinite Growth',    note: "This is one of Chenny's most personal and transformative offerings." };
-    return                         { service: 'Change For Good Consulting',      note: "Chenny will find the right fit for where you are right now." };
-  }
-
-  // ── STEP HANDLER ────────────────────────────────────────────
   function handleStep(input: string) {
+    const d = dataRef.current;
+
     switch (stepRef.current) {
 
-      case 'ask-name':
-        dataRef.current.name = input.split(' ')[0];
+      case 'ask-name': {
+        const firstName = input.trim().split(' ')[0];
+        d.name = firstName || input.trim();
         stepRef.current = 'ask-challenge';
-        botTypeThen(
-          `Great to meet you, ${dataRef.current.name}! What best describes why you're here today?`,
+        botSay(
+          `Lovely to meet you, ${d.name}! What brings you here today?`,
           [
-            { v: 'strategy',  l: 'I need a clearer strategy' },
-            { v: 'alignment', l: "My team isn't aligned" },
-            { v: 'growth',    l: 'I want to grow but need direction' },
-            { v: 'coaching',  l: "I'm looking for a coach" },
-            { v: 'exploring', l: 'Just exploring' },
+            { v: 'strategy',   l: "I need a clearer strategy" },
+            { v: 'alignment',  l: "My team isn't aligned" },
+            { v: 'growth',     l: "I want to grow but need direction" },
+            { v: 'coaching',   l: "I'm looking for a coach" },
+            { v: 'innovation', l: "I want to innovate" },
+            { v: 'exploring',  l: "Just exploring for now" },
           ]
         );
         break;
+      }
 
-      case 'ask-challenge':
-        dataRef.current.challenge = input;
+      case 'ask-challenge': {
+        d.challenge = input;
         stepRef.current = 'ask-context';
+
         if (input === 'strategy') {
-          botTypeThen('Strategy is exactly where we start. What industry are you in?', [
-            { v: 'Financial services',   l: 'Financial services' },
-            { v: 'Aviation / Transport', l: 'Aviation / Transport' },
-            { v: 'Social enterprise',    l: 'Social enterprise' },
-            { v: 'SME / Startup',        l: 'SME / Startup' },
-            { v: 'Other',                l: 'Other' },
-          ]);
+          botSay(
+            `Strategy is exactly where we start — and it begins with honest diagnosis, not assumptions.\n\nWhat industry are you in?`,
+            [
+              { v: 'Financial services',    l: 'Financial services' },
+              { v: 'Aviation / Transport',  l: 'Aviation / Transport' },
+              { v: 'Social enterprise',     l: 'Social enterprise' },
+              { v: 'SME / Startup',         l: 'SME / Startup' },
+              { v: 'Education',             l: 'Education' },
+              { v: 'Other',                 l: 'Other' },
+            ]
+          );
         } else if (input === 'alignment') {
-          botTypeThen('Alignment challenges are more common than most leaders admit — and very fixable. How large is your team?', [
-            { v: 'Small (under 20)', l: 'Small (under 20)' },
-            { v: 'Medium (20–100)',  l: 'Medium (20–100)' },
-            { v: 'Large (100+)',     l: 'Large (100+)' },
-          ]);
+          botSay(
+            `Alignment challenges are more common than most leaders admit — and very fixable when approached the right way.\n\nHow large is your team?`,
+            [
+              { v: 'Small (under 20)', l: 'Small (under 20)' },
+              { v: 'Medium (20–100)',  l: 'Medium (20–100)' },
+              { v: 'Large (100+)',     l: 'Large (100+)' },
+            ]
+          );
         } else if (input === 'growth') {
-          botTypeThen("Growth with direction — that's exactly what we help build. Which best describes your organisation?", [
-            { v: 'Startup',           l: 'Startup' },
-            { v: 'Established SME',   l: 'Established SME' },
-            { v: 'Social enterprise', l: 'Social enterprise' },
-            { v: 'Other',             l: 'Other' },
-          ]);
+          botSay(
+            `Growth with direction — that's exactly what we help build. How would you describe your organisation right now?`,
+            [
+              { v: 'Early-stage startup', l: 'Early-stage startup' },
+              { v: 'Established SME',     l: 'Established SME' },
+              { v: 'Social enterprise',   l: 'Social enterprise' },
+              { v: 'Large organisation',  l: 'Large organisation' },
+            ]
+          );
         } else if (input === 'coaching') {
-          botTypeThen("Coaching for Infinite Growth is one of Chenny's most transformative offerings. Is the coaching for yourself or for a leadership team?", [
-            { v: 'For myself', l: 'For myself' },
-            { v: 'For my team', l: 'For my team' },
-            { v: 'Both', l: 'Both' },
-          ]);
+          botSay(
+            `Coaching for Infinite Growth is one of Chenny's most transformative offerings — built around the belief that real professional growth and personal growth cannot be separated.\n\nIs the coaching for yourself, your leadership team, or both?`,
+            [
+              { v: 'For myself',   l: 'For myself' },
+              { v: 'For my team',  l: 'For my team' },
+              { v: 'Both',         l: 'Both' },
+            ]
+          );
+        } else if (input === 'innovation') {
+          botSay(
+            `Innovation is at the heart of what we do — using frameworks like ExO, Design Thinking, and Systems Thinking to help teams challenge assumptions and build what's next.\n\nWhat's the context?`,
+            [
+              { v: 'We need a fresh approach to an old problem', l: 'Fresh approach to an old problem' },
+              { v: 'We want to build something new',            l: 'Building something new' },
+              { v: 'We want to future-proof the organisation',  l: 'Future-proofing the organisation' },
+            ]
+          );
         } else {
-          // exploring
-          stepRef.current = 'ask-explore';
-          botTypeThen("No pressure at all — take your time. Is there a particular area you're curious about?", [
-            { v: 'Strategy',        l: 'Strategy' },
-            { v: 'Innovation',      l: 'Innovation' },
-            { v: 'Coaching',        l: 'Coaching' },
-            { v: 'All of the above', l: 'All of the above' },
-          ]);
+          // exploring or free text
+          stepRef.current = 'ask-email-soft';
+          botSay(
+            `No pressure at all, ${d.name} — this is a good place to start. Is there a particular area you're most curious about?`,
+            [
+              { v: 'Strategy',   l: 'Strategy' },
+              { v: 'Coaching',   l: 'Coaching' },
+              { v: 'Innovation', l: 'Innovation' },
+              { v: 'All of it',  l: 'All of it, honestly' },
+            ]
+          );
         }
         break;
+      }
 
-      case 'ask-explore':
-        dataRef.current.context = input;
-        stepRef.current = 'ask-email-soft';
-        botTypeThen(`${input} — great area to explore. We have a lot to share there.\n\nWould you like to leave your email so Chenny can reach out when you're ready?`, [
-          { v: 'yes-email', l: "Sure, I'd love that" },
-          { v: 'no-email',  l: 'Maybe later' },
-        ]);
-        break;
-
-      case 'ask-email-soft':
-        if (input === 'no-email') {
-          stepRef.current = 'done';
-          botTypeThen(`No problem at all, ${dataRef.current.name}. Feel free to explore the site — and come back anytime. 👋`, [
-            { v: 'services',   l: 'Explore services' },
-            { v: 'diagnostic', l: 'Take the Diagnostic' },
-          ]);
-        } else {
-          stepRef.current = 'ask-email';
-          botTypeThen("What's the best email address for Chenny to reach you?");
-        }
-        break;
-
-      case 'ask-context':
-        dataRef.current.context = input;
+      case 'ask-context': {
+        d.context = input;
+        const rec = getRec(d.challenge);
+        d.recommendation = rec.service;
         stepRef.current = 'ask-email';
-        botTypeThen("Got it. One last thing — what's the best email for Chenny to reach you?");
+        botSay(
+          `Got it — that's really helpful context, ${d.name}.\n\nBased on what you've shared, <strong>${rec.service}</strong> sounds like a strong fit for where you are.\n\nWhat's the best email for Chenny to reach you? She personally reviews every message.`
+        );
         break;
+      }
+
+      case 'ask-email-soft': {
+        d.context = input;
+        stepRef.current = 'ask-email';
+        botSay(
+          `${input} — great space to explore. We have a lot to share there.\n\nWould you like to leave your email so Chenny can reach out when you're ready? She reads every message personally.`,
+          [
+            { v: 'yes', l: "Yes, I'd love that" },
+            { v: 'no',  l: "Maybe later" },
+          ]
+        );
+        break;
+      }
 
       case 'ask-email': {
-        if (!input.includes('@')) {
-          botTypeThen("Could you double-check that email address? It doesn't look quite right.");
+        if (input === 'no') {
+          stepRef.current = 'done';
+          botSay(
+            `No problem at all — the door is always open whenever you're ready, ${d.name}.\n\nIn the meantime, feel free to explore:`,
+            [
+              { v: 'services',    l: 'Explore our services' },
+              { v: 'diagnostic',  l: 'Take the free Diagnostic' },
+            ]
+          );
           break;
         }
-        dataRef.current.email = input;
+
+        // validate email
+        if (!input.includes('@') || !input.includes('.')) {
+          botSay(`Hmm, that doesn't look quite right — could you double-check the email address?`);
+          break;
+        }
+
+        d.email = input;
+        const rec = getRec(d.challenge);
+        d.recommendation = rec.service || d.recommendation;
         stepRef.current = 'closing';
-        const rec = getRecommendation();
-        botTypeThen(
-          `Thank you, ${dataRef.current.name}! 🙏\n\nBased on what you've shared, <strong>${rec.service}</strong> sounds like the right starting point.\n\n${rec.note}\n\nChenny personally reviews every message and will be in touch within 24 hours.`,
+        saveLead();
+
+        botSay(
+          `Thank you, ${d.name}! 🙏\n\n${rec.note}\n\nChenny will be in touch within 24 hours. In the meantime:`,
           [
-            { v: 'services',   l: 'Explore services' },
-            { v: 'diagnostic', l: 'Take the Diagnostic' },
-            { v: 'done',       l: "That's all, thanks!" },
+            { v: 'services',   l: 'Explore our services' },
+            { v: 'diagnostic', l: 'Take the free Diagnostic' },
+            { v: 'done',       l: "That's all for now" },
           ]
         );
         break;
       }
 
       case 'closing':
-      case 'done':
+      case 'done': {
         if (input === 'services') {
           closeChat();
           router.push('/services');
         } else if (input === 'diagnostic') {
           closeChat();
           router.push('/resources');
-          // Signal resources page to open diagnostic
           setTimeout(() => window.dispatchEvent(new CustomEvent('cfg:openDiagnostic')), 300);
         } else {
           stepRef.current = 'ended';
-          botTypeThen(`Wonderful. Looking forward to the conversation, ${dataRef.current.name}. 👋`);
+          botSay(`Wonderful. Looking forward to the conversation, ${d.name}. 👋`);
           setTimeout(closeChat, 3000);
         }
         break;
+      }
+
+      default: {
+        // Fallback for unexpected state
+        botSay(`Sorry, I didn't catch that — could you try one of the options below?`, quickReplies.length ? quickReplies : undefined);
+        break;
+      }
     }
   }
 
-  // ── SEND ────────────────────────────────────────────────────
   function chatSend() {
     const text = inputVal.trim();
     if (!text) return;
@@ -252,14 +300,12 @@ export default function ChatBot() {
 
   return (
     <>
-      {/* FAB */}
       <button className="chat-fab" onClick={openChat} title="Start the conversation">
         <svg viewBox="0 0 24 24">
           <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
         </svg>
       </button>
 
-      {/* PANEL */}
       <div className={`chat-panel${open ? ' open' : ''}`}>
         <div className="chat-header">
           <div className="chat-header-left">
@@ -283,7 +329,7 @@ export default function ChatBot() {
             </div>
           ))}
 
-          {typing.active && (
+          {typing && (
             <div className="msg bot">
               <div className="msg-avatar">CFG</div>
               <div className="typing-indicator">

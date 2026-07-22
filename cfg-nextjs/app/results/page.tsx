@@ -10,7 +10,7 @@ export default function ResultsPage() {
       <div className="section">
         <div className="stat-row">
           <div className="stat-box"><div className="stat-num">5+</div><div className="stat-lbl">major organization transformations supported</div></div>
-          <div className="stat-box"><div className="stat-num">25+</div><div className="stat-lbl">strategic initiatives for PAL</div></div>
+          <div className="stat-box"><div className="stat-num">25+</div><div className="stat-lbl">strategic initiatives for networked teams</div></div>
           <div className="stat-box"><div className="stat-num">100%</div><div className="stat-lbl">commitment to measurable outcomes</div></div>
         </div>
       </div>
@@ -34,7 +34,8 @@ export default function ResultsPage() {
         </div>
       </div>
 
-      <div className="section section-alt teacher-bg">
+      <div className="teacher-bg">
+      <div className="section section-alt">
         <p className="slabel">What clients say</p>
         <div className="result-card mb12">
           <div className="testimonial">
@@ -55,10 +56,11 @@ export default function ResultsPage() {
           </div>
         </div>
       </div>
+      </div>
 
       <div className="section" style={{ textAlign: 'center', padding: '28px' }}>
         <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: '0 0 14px' }}>Your organization&rsquo;s story could be next.</p>
-        <button className="btn-primary">Let&rsquo;s talk about your goals</button>
+        <a href="/contact"><button className="btn-primary">Let&rsquo;s talk about your goals</button></a>
       </div>
     </>
   );

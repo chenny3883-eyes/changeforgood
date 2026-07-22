@@ -1,4 +1,30 @@
+'use client';
+
+import { useState } from 'react';
+
 export default function ContactPage() {
+  const [form, setForm] = useState({ name: '', email: '', organization: '', message: '', service: 'Strategy consulting' });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+
+  function set(field: string, value: string) {
+    setForm(f => ({ ...f, [field]: value }));
+  }
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus('sending');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      setStatus(res.ok ? 'sent' : 'error');
+    } catch {
+      setStatus('error');
+    }
+  }
+
   return (
     <>
       <div className="hero">
@@ -10,28 +36,45 @@ export default function ContactPage() {
       <div className="section">
         <div className="g2" style={{ alignItems: 'start' }}>
           <div>
-            <div className="form-field"><label>Your name</label><input type="text" placeholder="Juan dela Cruz" /></div>
-            <div className="form-field"><label>Email address</label><input type="email" placeholder="juan@yourcompany.com" /></div>
-            <div className="form-field"><label>Organization</label><input type="text" placeholder="Company name or 'Individual'" /></div>
-            <div className="form-field">
-              <label>What are you working through?</label>
-              <textarea placeholder="Tell us about your situation — your goals, your challenges, and what kind of support you're looking for..."></textarea>
-            </div>
-            <div className="form-field">
-              <label>Service area of interest</label>
-              <select>
-                <option>Strategy consulting</option>
-                <option>Marketing and branding</option>
-                <option>Sales consulting</option>
-                <option>Business development</option>
-                <option>Coaching for infinite growth</option>
-                <option>Innovation sprint and program design</option>
-                <option>Not sure yet</option>
-              </select>
-            </div>
-            <button className="btn-primary w100">Send message</button>
-            <div className="trust-note">&#128274; Your details are never shared or sold.</div>
+            {status === 'sent' ? (
+              <div style={{ background: 'rgba(76,175,130,0.12)', border: '1.5px solid rgba(76,175,130,0.4)', borderRadius: '12px', padding: '28px 24px', textAlign: 'center' }}>
+                <div style={{ fontSize: '36px', marginBottom: '12px' }}>✓</div>
+                <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#fff', marginBottom: '8px' }}>Message received!</h3>
+                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '16px' }}>
+                  Thank you, {form.name}. Chenny personally reviews every inquiry and will respond within 24 hours.
+                </p>
+                <button className="btn-outline" onClick={() => setStatus('idle')}>Send another message</button>
+              </div>
+            ) : (
+              <form onSubmit={submit}>
+                <div className="form-field"><label>Your name</label><input type="text" placeholder="Juan dela Cruz" value={form.name} onChange={e => set('name', e.target.value)} required /></div>
+                <div className="form-field"><label>Email address</label><input type="email" placeholder="juan@yourcompany.com" value={form.email} onChange={e => set('email', e.target.value)} required /></div>
+                <div className="form-field"><label>Organization</label><input type="text" placeholder="Company name or 'Individual'" value={form.organization} onChange={e => set('organization', e.target.value)} /></div>
+                <div className="form-field">
+                  <label>What are you working through?</label>
+                  <textarea placeholder="Tell us about your situation — your goals, your challenges, and what kind of support you're looking for..." value={form.message} onChange={e => set('message', e.target.value)}></textarea>
+                </div>
+                <div className="form-field">
+                  <label>Service area of interest</label>
+                  <select value={form.service} onChange={e => set('service', e.target.value)}>
+                    <option>Strategy consulting</option>
+                    <option>Marketing and branding</option>
+                    <option>Sales consulting</option>
+                    <option>Business development</option>
+                    <option>Coaching for infinite growth</option>
+                    <option>Innovation sprint and program design</option>
+                    <option>Not sure yet</option>
+                  </select>
+                </div>
+                {status === 'error' && <p style={{ fontSize: '13px', color: '#E05A5A', marginBottom: '10px' }}>Something went wrong. Please try again.</p>}
+                <button type="submit" className="btn-primary w100" disabled={status === 'sending'}>
+                  {status === 'sending' ? 'Sending…' : 'Send message'}
+                </button>
+                <div className="trust-note">&#128274; Your details are never shared or sold.</div>
+              </form>
+            )}
           </div>
+
           <div>
             <div className="card mb12">
               <p className="slabel" style={{ marginBottom: '10px' }}>What happens next</p>
@@ -43,7 +86,6 @@ export default function ContactPage() {
             </div>
             <div className="card mb12">
               <p className="slabel" style={{ marginBottom: '12px' }}>Reach us directly</p>
-              <div className="contact-info-row"><span className="contact-info-icon">&#128222;</span>09178086881 &middot; calls, WhatsApp and Viber</div>
               <div className="contact-info-row"><span className="contact-info-icon">&#9993;</span>chenny@cfgconsultingph.com</div>
               <div className="contact-info-row"><span className="contact-info-icon">&#128279;</span>linkedin.com/in/chenny-galano</div>
               <div className="contact-info-row"><span className="contact-info-icon">&#128205;</span>Philippines &middot; working globally</div>

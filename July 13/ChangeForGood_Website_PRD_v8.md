@@ -4,9 +4,9 @@
 ---
 
 # WEBSITE PRODUCT REQUIREMENTS DOCUMENT
-**Version:** 8.0  
+**Version:** 8.1  
 **Prepared by:** Chenny Galano, Founder  
-**Date prepared:** July 22, 2026  
+**Date prepared:** July 23, 2026  
 **Project name:** Change For Good Consulting Website  
 **Target launch date:** November 5, 2026  
 **Status:** Draft
@@ -20,6 +20,7 @@
 | 6.0 | July 20, 2026 | About page: two-sided vertical timeline for credentials, Chenny warm photo inset + CFG logo in bio section; Services page: lake.jpg photo background wrapping Signature Programme card and carousel; Results page: stat label updated, teacher-bg photo background fix |
 | 7.0 | July 20, 2026 | About page: CFG brand gradient background on Credentials and Experience section; Results page: "Let's talk about your goals" button linked to Contact page |
 | 8.0 | July 22, 2026 | Services page: "How an engagement works" redesigned as 2×2 numbered card grid; Global typography scale increased; Full-width layout (body margins removed); Contact form made functional with CSV backend; Chatbot improved (6th branch, lead saving); Hidden admin dashboard added; Contact page: mobile number removed from direct contact details |
+| 8.1 | July 23, 2026 | Clarity-First Diagnostic: radar chart added to results screen — pure SVG pentagon showing all 5 area scores visually alongside the numerical bar chart |
 
 ---
 
@@ -419,6 +420,21 @@ Unchanged from v7. Key addition in v8:
 | q1–q10 | Individual answer values (1–5) |
 
 The visitor never sees the save. No confirmation message is shown — the results screen is unchanged.
+
+**Radar chart (v8.1):** The results screen now includes a "Your Leadership Radar" section displayed between the action buttons (Download / Retake) and the "Your results by area" bar chart. The radar is a pure SVG pentagon — no external charting library required.
+
+| Element | Spec |
+|---|---|
+| Shape | Regular pentagon, 5 axes (one per area), origin at top |
+| Grid | 5 concentric pentagons at score levels 2, 4, 6, 8, 10 — muted white, low opacity |
+| Scale ticks | Values 2, 6, 10 shown on the Strategic Clarity axis |
+| Data polygon | Gold fill `rgba(212,160,23,0.22)`, gold stroke `#D4A017`, 2.5px |
+| Data dots | Gold filled circles (r=5), deep purple outline |
+| Score labels | Bright gold numbers inset just inside each dot toward centre |
+| Axis labels | Two-line white labels at each vertex — Strategic Clarity (top, centred), Leadership Alignment (upper right), People & Culture (lower right), Innovation & Growth (lower left), Execution & Results (upper left) |
+| Card wrapper | Subtle white background `rgba(255,255,255,0.04)`, gold border `rgba(212,160,23,0.18)`, 14px border radius |
+
+The 5 axis scores feed directly from the same `areaScores` array that drives the bar chart, ensuring the radar and bars always agree. The chart is rendered via the `RadarChart` component defined in `components/ClarityDiagnostic.tsx`.
 
 ---
 

@@ -88,6 +88,89 @@ const DPROFILES: Profile[] = [
   },
 ];
 
+function RadarChart({ scores }: { scores: number[] }) {
+  // Pentagon: 5 axes, origin top-centre, clockwise
+  // viewBox gives generous padding so labels at all 5 vertices fit cleanly
+  // Wide viewBox so labels at all 5 vertices have room — pentagon centred at (cx,cy)
+  const cx = 260, cy = 172, R = 90, N = 5;
+  const labelR = R + 30;
+
+  // Two-line labels; single-line for top (index 0) which has plenty of horizontal room
+  const LABELS: string[][] = [
+    ['Strategic Clarity'],
+    ['Leadership', 'Alignment'],
+    ['People &', 'Culture'],
+    ['Innovation', '& Growth'],
+    ['Execution', '& Results'],
+  ];
+
+  function pt(r: number, i: number): [number, number] {
+    const a = (i * 2 * Math.PI / N) - Math.PI / 2;
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  }
+
+  function poly(r: number) {
+    return Array.from({ length: N }, (_, i) => pt(r, i).join(',')).join(' ');
+  }
+
+  const dataPts = scores.map((s, i) => pt((s / 10) * R, i).join(',')).join(' ');
+
+  return (
+    <svg viewBox="0 0 520 340" width="100%" style={{ maxWidth: '480px', display: 'block', margin: '0 auto' }}>
+      {/* Grid rings */}
+      {[2, 4, 6, 8, 10].map(lv => (
+        <polygon key={lv} points={poly((lv / 10) * R)}
+          fill="none" stroke="rgba(255,255,255,0.09)" strokeWidth="1" />
+      ))}
+      {/* Scale ticks on top axis */}
+      {[2, 6, 10].map(lv => {
+        const [x, y] = pt((lv / 10) * R, 0);
+        return <text key={lv} x={x + 5} y={y} fontSize="8"
+          fill="rgba(255,255,255,0.30)" dominantBaseline="middle">{lv}</text>;
+      })}
+      {/* Axis spokes */}
+      {Array.from({ length: N }, (_, i) => {
+        const [x2, y2] = pt(R, i);
+        return <line key={i} x1={cx} y1={cy} x2={x2} y2={y2}
+          stroke="rgba(255,255,255,0.13)" strokeWidth="1" />;
+      })}
+      {/* Data polygon */}
+      <polygon points={dataPts}
+        fill="rgba(212,160,23,0.22)" stroke="#D4A017" strokeWidth="2.5" strokeLinejoin="round" />
+      {/* Data dots */}
+      {scores.map((s, i) => {
+        const [x, y] = pt((s / 10) * R, i);
+        return <circle key={i} cx={x} cy={y} r={5}
+          fill="#D4A017" stroke="#1a1560" strokeWidth="2" />;
+      })}
+      {/* Score values inward from each dot */}
+      {scores.map((s, i) => {
+        const inR = Math.max((s / 10) * R - 16, 6);
+        const [x, y] = pt(inR, i);
+        return <text key={i} x={x} y={y} textAnchor="middle" dominantBaseline="middle"
+          fontSize="10" fill="#F5C842" fontWeight="800" fontFamily="inherit">{s}</text>;
+      })}
+      {/* Axis labels — two lines for side/bottom vertices */}
+      {LABELS.map((lines, i) => {
+        const a = (i * 2 * Math.PI / N) - Math.PI / 2;
+        const cosA = Math.cos(a);
+        const [lx, ly] = pt(labelR, i);
+        const anchor: string = Math.abs(cosA) < 0.3 ? 'middle' : cosA > 0 ? 'start' : 'end';
+        const lineH = 14;
+        const totalH = lines.length * lineH;
+        return (
+          <text key={i} textAnchor={anchor} fontSize="11.5" fontFamily="inherit"
+            fill="rgba(255,255,255,0.80)">
+            {lines.map((line, j) => (
+              <tspan key={j} x={lx} y={ly - totalH / 2 + lineH / 2 + j * lineH}>{line}</tspan>
+            ))}
+          </text>
+        );
+      })}
+    </svg>
+  );
+}
+
 type Screen = 'gate' | 'questions' | 'results';
 
 interface AreaResult {
@@ -311,6 +394,11 @@ export default function ClarityDiagnostic({ onBack }: { onBack: () => void }) {
           <div className="diag-actions">
             <button className="btn-primary" onClick={() => window.print()}>&#8595; Download results (PDF)</button>
             <button className="btn-outline" onClick={retake}>Retake diagnostic</button>
+          </div>
+
+          <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(212,160,23,0.18)', borderRadius: '14px', padding: '20px 4px 8px', marginBottom: '20px' }}>
+            <p className="slabel" style={{ marginBottom: '12px', textAlign: 'center' }}>Your leadership radar</p>
+            <RadarChart scores={results.areaScores.map(r => r.score)} />
           </div>
 
           <p className="slabel">Your results by area</p>

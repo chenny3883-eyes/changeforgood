@@ -87,11 +87,31 @@ export default function ServicesPage() {
 
       <div className="section">
         <p className="slabel">Who we serve</p>
-        <div className="g2">
-          <div className="card"><h4>SMEs</h4><p>Established businesses ready to sharpen strategy, strengthen brand, and build systems that turn ambition into sustainable growth.</p></div>
-          <div className="card"><h4>Startups</h4><p>Founders with a vision who need clarity, positioning, and go-to-market strategy to move from idea to traction with confidence.</p></div>
-          <div className="card"><h4>Social enterprises</h4><p>Mission-led organizations that need business rigour to match their social purpose &mdash; doing good and performing well are not a trade-off.</p></div>
-          <div className="card"><h4>Diverse organizations</h4><p>Organizations spanning multiple sectors who need an integrated consulting partner that can navigate complexity and deliver coherent strategy.</p></div>
+        <div className="val-carousel-track" style={{ flexWrap: 'nowrap', alignItems: 'stretch' }}>
+          <div className="val-card" style={{ flex: '1 1 0', minWidth: 0, maxWidth: 'none' }}>
+            <div style={{ padding: '22px 18px 0' }}>
+              <div className="val-title" style={{ fontSize: '17px', marginBottom: '10px' }}>SMEs</div>
+              <div className="val-body">Established businesses ready to sharpen strategy, strengthen brand, and build systems that turn ambition into sustainable growth.</div>
+            </div>
+          </div>
+          <div className="val-card" style={{ flex: '1 1 0', minWidth: 0, maxWidth: 'none' }}>
+            <div style={{ padding: '22px 18px 0' }}>
+              <div className="val-title" style={{ fontSize: '17px', marginBottom: '10px' }}>Startups</div>
+              <div className="val-body">Founders with a vision who need clarity, positioning, and go-to-market strategy to move from idea to traction with confidence.</div>
+            </div>
+          </div>
+          <div className="val-card" style={{ flex: '1 1 0', minWidth: 0, maxWidth: 'none' }}>
+            <div style={{ padding: '22px 18px 0' }}>
+              <div className="val-title" style={{ fontSize: '17px', marginBottom: '10px' }}>Social enterprises</div>
+              <div className="val-body">Mission-led organizations that need business rigour to match their social purpose &mdash; doing good and performing well are not a trade-off.</div>
+            </div>
+          </div>
+          <div className="val-card" style={{ flex: '1 1 0', minWidth: 0, maxWidth: 'none' }}>
+            <div style={{ padding: '22px 18px 0' }}>
+              <div className="val-title" style={{ fontSize: '17px', marginBottom: '10px' }}>Diverse organizations</div>
+              <div className="val-body">Organizations spanning multiple sectors who need an integrated consulting partner that can navigate complexity and deliver coherent strategy.</div>
+            </div>
+          </div>
         </div>
       </div>
     </>

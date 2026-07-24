@@ -248,17 +248,28 @@ export default function AboutPage() {
 
       <div className="section">
         <p className="slabel">How we work</p>
-        <div className="val-item">
-          <span style={{ fontSize: '20px', color: 'var(--cfg-gold)', flexShrink: 0 }}>&#128065;</span>
-          <div><div className="val-title">Integrity &mdash; we say the hard things, kindly</div><div className="val-body">Honest diagnosis before any solution is prescribed. We will never tell you what you want to hear at the expense of what you need to hear.</div></div>
-        </div>
-        <div className="val-item">
-          <span style={{ fontSize: '20px', color: 'var(--cfg-gold)', flexShrink: 0 }}>&#128737;</span>
-          <div><div className="val-title">Courage &mdash; we commit to measurable outcomes</div><div className="val-body">Every engagement ends not with a presentation but with a plan, a team aligned behind it, and people growing in skill and in character.</div></div>
-        </div>
-        <div className="val-item">
-          <img src="/photos/infinite-growth.png" alt="Infinite Growth" style={{ width: '48px', height: '48px', objectFit: 'contain', flexShrink: 0 }} />
-          <div><div className="val-title">Infinite growth &mdash; built with you, not handed down</div><div className="val-body">Solutions co-created with your team. We believe every person &mdash; and every business &mdash; holds more potential than they have yet discovered.</div></div>
+        <div className="val-carousel-track">
+            <div className="val-card">
+              <div className="val-card-img-wrap">
+                <img src="/photos/integrity.png" alt="Integrity" />
+              </div>
+              <div className="val-title">Integrity &mdash; we say the hard things, kindly</div>
+              <div className="val-body">Honest diagnosis before any solution is prescribed. We will never tell you what you want to hear at the expense of what you need to hear.</div>
+            </div>
+            <div className="val-card">
+              <div className="val-card-img-wrap">
+                <img src="/photos/courage-and-commitment.png" alt="Courage and Commitment" />
+              </div>
+              <div className="val-title">Courage &mdash; we commit to measurable outcomes</div>
+              <div className="val-body">Every engagement ends not with a presentation but with a plan, a team aligned behind it, and people growing in skill and in character.</div>
+            </div>
+            <div className="val-card">
+              <div className="val-card-img-wrap">
+                <img src="/photos/infinite-growth.png" alt="Infinite Growth" />
+              </div>
+              <div className="val-title">Infinite growth &mdash; built with you, not handed down</div>
+              <div className="val-body">Solutions co-created with your team. We believe every person &mdash; and every business &mdash; holds more potential than they have yet discovered.</div>
+            </div>
         </div>
       </div>
     </>

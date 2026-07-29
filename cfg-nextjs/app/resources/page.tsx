@@ -45,7 +45,9 @@ export default function ResourcesPage() {
                 </div>
               </Link>
               <div className="art-card">
-                <div className="art-img">&#128247; Cover image</div>
+                <div className="art-img" style={{ background: 'linear-gradient(135deg, #1a1560 0%, #2D2380 100%)', alignItems: 'center', justifyContent: 'center' }}>
+                  <img src="/photos/cfg-logo-transparent.png" alt="Change For Good Consulting" style={{ width: '130px', filter: 'brightness(0) invert(1)', opacity: 0.90 }} />
+                </div>
                 <div className="art-body">
                   <span className="tag-purple" style={{ fontSize: '10px' }}>Leadership</span>
                   <div className="art-title">The inner work that makes strategy stick</div>
@@ -53,7 +55,9 @@ export default function ResourcesPage() {
                 </div>
               </div>
               <div className="art-card">
-                <div className="art-img">&#128247; Cover image</div>
+                <div className="art-img" style={{ background: 'linear-gradient(135deg, #1a1560 0%, #2D2380 100%)', alignItems: 'center', justifyContent: 'center' }}>
+                  <img src="/photos/cfg-logo-transparent.png" alt="Change For Good Consulting" style={{ width: '130px', filter: 'brightness(0) invert(1)', opacity: 0.90 }} />
+                </div>
                 <div className="art-body">
                   <span className="tag-purple" style={{ fontSize: '10px' }}>Growth</span>
                   <div className="art-title">Change for good &mdash; what continuous improvement really means</div>

@@ -16,6 +16,11 @@ export default function ArticlePage() {
         </Link>
       </div>
 
+      {/* Cover image */}
+      <div style={{ borderRadius: '14px', overflow: 'hidden', marginTop: '28px' }}>
+        <img src="/photos/article-1-cover.png" alt="When We Change How We Talk, We Change What We Build" style={{ width: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+      </div>
+
       {/* Article header */}
       <div style={{ borderBottom: '1px solid rgba(255,255,255,0.10)', paddingBottom: '32px', marginBottom: '40px', marginTop: '32px' }}>
         <span className="tag-purple" style={{ fontSize: '11px', marginBottom: '16px', display: 'inline-block' }}>Leadership</span>

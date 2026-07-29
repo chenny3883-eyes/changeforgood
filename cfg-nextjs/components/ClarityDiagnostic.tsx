@@ -205,6 +205,13 @@ export default function ClarityDiagnostic({ onBack }: { onBack: () => void }) {
     const newAnswers = [...answers];
     newAnswers[current] = value;
     setAnswers(newAnswers);
+    // Auto-advance after a brief pause so the selection is visible
+    setTimeout(() => {
+      if (current < 9) {
+        setCurrent(current + 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 400);
   }
 
   function goNext() {

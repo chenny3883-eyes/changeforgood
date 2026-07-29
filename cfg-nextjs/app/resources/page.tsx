@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import ClarityDiagnostic from '@/components/ClarityDiagnostic';
 
 export default function ResourcesPage() {
@@ -33,14 +34,17 @@ export default function ResourcesPage() {
           <div className="section">
             <p className="slabel">From the desk of Chenny</p>
             <div className="g3">
-              <div className="art-card">
-                <div className="art-img">&#128247; Cover image</div>
-                <div className="art-body">
-                  <span className="tag-purple" style={{ fontSize: '10px' }}>Strategy</span>
-                  <div className="art-title">Why most strategic plans fail before they start</div>
-                  <div className="art-meta">5 min read</div>
+              <Link href="/resources/articles/4-levels-of-conversation" className="art-card">
+                <div className="art-img" style={{ background: 'linear-gradient(135deg, rgba(45,35,128,0.90) 0%, rgba(26,21,96,0.95) 100%)', flexDirection: 'column', gap: '8px', padding: '16px', textAlign: 'center' }}>
+                  <span style={{ fontSize: '28px' }}>💬</span>
+                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.50)', lineHeight: '1.4' }}>Yokohama, Japan</span>
                 </div>
-              </div>
+                <div className="art-body">
+                  <span className="tag-purple" style={{ fontSize: '10px' }}>Leadership</span>
+                  <div className="art-title">When We Change How We Talk, We Change What We Build</div>
+                  <div className="art-meta">8 min read</div>
+                </div>
+              </Link>
               <div className="art-card">
                 <div className="art-img">&#128247; Cover image</div>
                 <div className="art-body">

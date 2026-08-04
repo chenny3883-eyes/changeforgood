@@ -94,18 +94,20 @@ export default function ArticlePage() {
 
         <p>This is not simply a better version of debate, or even a calmer form of discussion. It is a fundamentally different quality of being together. William Isaacs — Senior Lecturer at MIT&rsquo;s Leadership Center, Founder and CEO of Dialogos, and author of <em>Dialogue and the Art of Thinking Together</em> — defines dialogue as a conversation with a center, not sides. A way of taking the energy of people&rsquo;s differences and channeling it into a new creation.</p>
 
-        <p>Bradley brought Isaacs&rsquo; work into our workshop through a framework that illuminates why some conversations stay stuck while others become transformative. In dialogue, Isaacs identifies four essential roles — roles that, when present and in balance, make generative conversation possible:</p>
+        <p>Bradley brought Isaacs&rsquo; work into our workshop through a framework that illuminates why some conversations stay stuck while others become transformative. Underlying this is the <strong>Four Player Model</strong> developed by David Kantor — systems psychologist, organizational theorist, and author of <em>Reading the Room</em> — which maps the four structural roles that are always present in any conversation, whether we are aware of them or not. In dialogue, these four roles, when present and in balance, make generative conversation possible:</p>
 
         <ul>
-          <li><strong>The Mover</strong> — who initiates direction</li>
-          <li><strong>The Follower</strong> — who provides completion and support</li>
-          <li><strong>The Opposer</strong> — who offers correction and challenges what is being said</li>
-          <li><strong>The Bystander</strong> — who holds perspective, observing what others cannot see from inside the exchange</li>
+          <li><strong>The Mover</strong> — who initiates direction. The Mover proposes, asserts, and sets things in motion. Without a Mover, there is no momentum — conversations stall in abstraction and nothing gets decided. In its shadow side, a Mover who dominates without listening shuts down the space for others.</li>
+          <li><strong>The Supporter</strong> — who provides completion and affirmation. The Supporter builds on what the Mover initiates, adding energy, agreement, and forward movement. Without a Supporter, ideas die before they can take root. But a Supporter who never questions can become an enabler of poor decisions.</li>
+          <li><strong>The Opposer</strong> — who offers correction and challenges what is being said. Far from being a disruptor, the Opposer is the conscience of the conversation — protecting the group from blind spots, groupthink, and untested assumptions. Without an Opposer, there is no critical thinking. In its healthy form, opposition is a gift; in its distorted form, it becomes chronic resistance.</li>
+          <li><strong>The Bystander</strong> — who holds perspective by stepping back to observe the whole. The Bystander sees what others inside the exchange cannot — the patterns, the dynamics, what is being said and what is not. Without a Bystander, the group loses its mirror. This is perhaps the most underestimated role: the one who pauses and names what is happening in the room.</li>
         </ul>
 
-        <p>Without movers, there is no direction. Without followers, there is no completion. Without opposers, there is no correction. Without bystanders, there is no perspective. A healthy conversation needs all four.</p>
+        <p><em>(Four Player Model © David Kantor, from <em>Reading the Room</em>, Jossey-Bass, 2012.)</em></p>
 
-        <p>What makes Generative Dialogue possible is not the elimination of tension — it is what happens to each person in these roles when deep listening is practiced. The Mover no longer pushes an agenda; they offer an invitation. The Opposer no longer attacks; they protect the integrity of the idea. The Follower no longer just agrees; they amplify what is most alive in the room. And the Bystander — perhaps the most underestimated role — holds the mirror.</p>
+        <p>Without movers, there is no direction. Without supporters, there is no completion. Without opposers, there is no correction. Without bystanders, there is no perspective. A healthy conversation needs all four — and Kantor&rsquo;s insight is that most dysfunctional conversations can be traced back to one or more of these roles being absent, overplayed, or distorted.</p>
+
+        <p>What makes Generative Dialogue possible is not the elimination of tension — it is what happens to each person in these roles when deep listening is practiced. The Mover no longer pushes an agenda; they offer an invitation. The Opposer no longer attacks; they protect the integrity of the idea. The Supporter no longer just agrees; they amplify what is most alive in the room. And the Bystander — perhaps the most underestimated role — holds the mirror.</p>
 
         <p>Let me bring this into a workplace scenario many of us may recognize.</p>
 

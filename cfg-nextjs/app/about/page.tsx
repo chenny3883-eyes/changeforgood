@@ -246,6 +246,200 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* ── CO-FOUNDER SECTION ── */}
+      <div className="section">
+        <p className="eyebrow" style={{ marginBottom: '6px' }}>Meet the co-founder</p>
+        <h2 style={{ marginBottom: '28px' }}>Jose Emmanuel &ldquo;Jimbo&rdquo; Reverente &mdash; systems architect, innovation strategist, and institution builder.</h2>
+        <div style={{ display: 'flex', gap: '28px', alignItems: 'flex-start' }}>
+          <div style={{ flex: '1 1 0', minWidth: 0 }}>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.75', margin: '0 0 14px' }}>Jimbo Reverente is a systems architect, innovation strategist, and institution builder whose career has moved across the factory floor, the boardroom, and national government. As Co-Founder of Change For Good Consulting, he brings a structural, execution-driven counterpart to the firm&rsquo;s human-centered practice. He builds the systems that make transformation last.</p>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.75', margin: '0 0 14px' }}>A graduate of Industrial Engineering from the University of the Philippines Diliman, Jimbo learned early that big problems are usually solved through small, disciplined redesigns. At Unilever&rsquo;s detergent powders plant in Manila, he moved from Methods Officer to Assistant Production Manager, rebuilding processes on the factory floor and leading a team of over 200. After earning his MBA in Finance and Strategy from Cornell University, he carried that same structural discipline into corporate finance at Amgen in California, managing cost analysis, pricing, and contract strategy for a multi-billion dollar biologics portfolio.</p>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.75', margin: '0 0 14px' }}>From there, Jimbo moved into senior finance and infrastructure roles: Chief Finance Officer of South Luzon Thermal Energy Corporation, then Deputy Executive Director of the Philippine Government&rsquo;s Public-Private Partnership Center, and eventually Undersecretary of Finance for Privatization, Special Concerns and Corporate Affairs. As Undersecretary, he chaired the Privatization and PPP cluster and sat on the boards of the National Power Corporation, PSALM, and TransCo.</p>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.75', margin: '0 0 14px' }}>After government service, Jimbo joined TRAIL in 2020 as Executive Coach, ExO Sprint Coach, and eventually Chief Innovation Officer. Over six years, he helped build the Philippines&rsquo; community of Exponential Organizations practitioners. A Fellowship in the MIT Sloan School of Management&rsquo;s IDEAS Asia Pacific Program gave him formal grounding in Systems Thinking and Theory U &mdash; methodologies that now sit at the center of how he reads any organization he works with.</p>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.75', margin: '0' }}>Today, Jimbo is Deputy Director at the University of the Philippines System&rsquo;s Technology Transfer and Business Development Office and an Assistant Professor at the UP Diliman College of Engineering. Where Chenny brings the vision and the human process, Jimbo brings the blueprint and the execution. Together, they are building Change For Good Consulting.</p>
+          </div>
+          <div style={{ flex: '0 0 220px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.35)' }}>
+              <img src="/photos/jimbo-2.jpeg" alt="Jose Emmanuel Jimbo Reverente — Co-Founder, Change For Good Consulting" style={{ width: '100%', display: 'block', objectFit: 'cover', objectPosition: 'center 20%' }} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Jimbo quote — Jimbo 1 photo background */}
+      <div style={{ background: `linear-gradient(to bottom, rgba(26,21,96,0.55) 0%, rgba(45,35,128,0.40) 50%, rgba(26,21,96,0.60) 100%), url('/photos/jimbo-1.jpeg') center 30% / cover no-repeat` }}>
+        <div className="section" style={{ background: 'transparent' }}>
+          <blockquote className="quote-block">
+            &ldquo;Big problems are usually solved through small, disciplined redesigns. The work is not grand gestures &mdash; it is the quiet, rigorous rebuilding of the system underneath.&rdquo;
+            <div className="quote-attr">&mdash; Jimbo Reverente, Co-Founder</div>
+          </blockquote>
+        </div>
+      </div>
+
+      {/* Jimbo timeline */}
+      <div className="section tl-section-bg">
+        <p className="slabel">Jimbo&rsquo;s credentials and experience</p>
+
+        <div className="tl-legend">
+          <div className="tl-legend-item">
+            <div className="tl-legend-dot" style={{ background: 'var(--cfg-gold)' }}></div>
+            Roles &amp; leadership
+          </div>
+          <div className="tl-legend-item">
+            <div className="tl-legend-dot" style={{ background: 'transparent', border: '1.5px solid rgba(212,160,23,0.4)' }}></div>
+            Education &amp; certifications
+          </div>
+        </div>
+
+        <div className="tl-wrap">
+          <div className="tl-spine"></div>
+
+          {/* 2025–Present */}
+          <div className="tl-row">
+            <div className="tl-left">
+              <div className="tl-cat">Academia</div>
+              <div className="tl-name">Deputy Director &mdash; UP System TTBDO</div>
+              <div className="tl-inst">University of the Philippines System</div>
+              <div className="tl-year">2025&ndash;Present</div>
+            </div>
+            <div className="tl-node"><div className="tl-dot tl-key"></div></div>
+            <div className="tl-spacer"></div>
+          </div>
+
+          <div className="tl-row">
+            <div className="tl-spacer"></div>
+            <div className="tl-node"><div className="tl-dot tl-key"></div></div>
+            <div className="tl-right">
+              <div className="tl-cat">Academia</div>
+              <div className="tl-name">Assistant Professor &mdash; Technopreneurship</div>
+              <div className="tl-inst">UP Diliman College of Engineering</div>
+              <div className="tl-year">2025&ndash;Present</div>
+            </div>
+          </div>
+
+          {/* 2023 — MIT */}
+          <div className="tl-row">
+            <div className="tl-left">
+              <div className="tl-cat">Leadership</div>
+              <div className="tl-name">Fellow &mdash; IDEAS Asia Pacific Program</div>
+              <div className="tl-inst">MIT Sloan School of Management</div>
+              <div className="tl-year">2023</div>
+            </div>
+            <div className="tl-node"><div className="tl-dot tl-key"></div></div>
+            <div className="tl-spacer"></div>
+          </div>
+
+          {/* 2021–2026 — TRAIL */}
+          <div className="tl-row">
+            <div className="tl-spacer"></div>
+            <div className="tl-node"><div className="tl-dot tl-key"></div></div>
+            <div className="tl-right">
+              <div className="tl-cat">Innovation</div>
+              <div className="tl-name">Chief Innovation Officer</div>
+              <div className="tl-inst">Rizal Academy for Innovation and Leadership (TRAIL)</div>
+              <div className="tl-year">2021&ndash;2026</div>
+            </div>
+          </div>
+
+          {/* 2020 — ExO */}
+          <div className="tl-row">
+            <div className="tl-left">
+              <div className="tl-cat">Innovation</div>
+              <div className="tl-name">ExO Trainer &middot; Sprint Coach &middot; Consultant</div>
+              <div className="tl-inst">OpenExO, Miami Beach, USA</div>
+              <div className="tl-year">2020</div>
+            </div>
+            <div className="tl-node"><div className="tl-dot tl-key"></div></div>
+            <div className="tl-spacer"></div>
+          </div>
+
+          {/* 2017–2020 — Aboitiz / JG Summit */}
+          <div className="tl-row">
+            <div className="tl-spacer"></div>
+            <div className="tl-node"><div className="tl-dot"></div></div>
+            <div className="tl-right">
+              <div className="tl-cat">Industry</div>
+              <div className="tl-name">VP Finance &middot; VP Business Development &middot; VP External Relations</div>
+              <div className="tl-inst">Aboitiz Group &middot; JG Summit</div>
+              <div className="tl-year">2015&ndash;2020</div>
+            </div>
+          </div>
+
+          {/* 2014–2015 — Undersecretary */}
+          <div className="tl-row">
+            <div className="tl-left">
+              <div className="tl-cat">Government</div>
+              <div className="tl-name">Undersecretary of Finance</div>
+              <div className="tl-inst">Department of Finance, Republic of the Philippines</div>
+              <div className="tl-year">2014&ndash;2015</div>
+            </div>
+            <div className="tl-node"><div className="tl-dot tl-key"></div></div>
+            <div className="tl-spacer"></div>
+          </div>
+
+          {/* 2013–2014 — PPP */}
+          <div className="tl-row">
+            <div className="tl-spacer"></div>
+            <div className="tl-node"><div className="tl-dot tl-key"></div></div>
+            <div className="tl-right">
+              <div className="tl-cat">Government</div>
+              <div className="tl-name">Deputy Executive Director (Asst. Secretary)</div>
+              <div className="tl-inst">Public-Private Partnership Center</div>
+              <div className="tl-year">2013&ndash;2014</div>
+            </div>
+          </div>
+
+          {/* 2012–2013 — CFO */}
+          <div className="tl-row">
+            <div className="tl-left">
+              <div className="tl-cat">Finance</div>
+              <div className="tl-name">VP &mdash; Chief Finance Officer</div>
+              <div className="tl-inst">South Luzon Thermal Energy Corporation</div>
+              <div className="tl-year">2012&ndash;2013</div>
+            </div>
+            <div className="tl-node"><div className="tl-dot tl-key"></div></div>
+            <div className="tl-spacer"></div>
+          </div>
+
+          {/* 2001–2011 — US career */}
+          <div className="tl-row">
+            <div className="tl-spacer"></div>
+            <div className="tl-node"><div className="tl-dot"></div></div>
+            <div className="tl-right">
+              <div className="tl-cat">Industry</div>
+              <div className="tl-name">Finance &amp; Strategy roles</div>
+              <div className="tl-inst">Amgen Inc. &middot; Data Exchange Corporation &middot; California, USA</div>
+              <div className="tl-year">2001&ndash;2011</div>
+            </div>
+          </div>
+
+          {/* 2001 — Cornell */}
+          <div className="tl-row">
+            <div className="tl-left">
+              <div className="tl-cat">Education</div>
+              <div className="tl-name">MBA &mdash; Finance and Strategy</div>
+              <div className="tl-inst">Cornell University, Johnson Graduate School of Management</div>
+              <div className="tl-year">2001</div>
+            </div>
+            <div className="tl-node"><div className="tl-dot tl-key"></div></div>
+            <div className="tl-spacer"></div>
+          </div>
+
+          {/* 1992 — UP */}
+          <div className="tl-row">
+            <div className="tl-spacer"></div>
+            <div className="tl-node"><div className="tl-dot tl-key"></div></div>
+            <div className="tl-right">
+              <div className="tl-cat">Education</div>
+              <div className="tl-name">BS Industrial Engineering</div>
+              <div className="tl-inst">University of the Philippines Diliman</div>
+              <div className="tl-year">1992</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       <div className="section">
         <p className="slabel">How we work</p>
         <div className="val-carousel-track">

@@ -155,7 +155,7 @@ function RadarChart({ scores }: { scores: number[] }) {
         const a = (i * 2 * Math.PI / N) - Math.PI / 2;
         const cosA = Math.cos(a);
         const [lx, ly] = pt(labelR, i);
-        const anchor: string = Math.abs(cosA) < 0.3 ? 'middle' : cosA > 0 ? 'start' : 'end';
+        const anchor: 'middle' | 'start' | 'end' = Math.abs(cosA) < 0.3 ? 'middle' : cosA > 0 ? 'start' : 'end';
         const lineH = 14;
         const totalH = lines.length * lineH;
         return (

@@ -267,9 +267,9 @@ export default function AboutPage() {
       </div>
 
       {/* Jimbo quote — Jimbo 1 photo background */}
-      <div style={{ background: `linear-gradient(to bottom, rgba(26,21,96,0.55) 0%, rgba(45,35,128,0.40) 50%, rgba(26,21,96,0.60) 100%), url('/photos/jimbo-1.jpeg') center 30% / cover no-repeat` }}>
-        <div className="section" style={{ background: 'transparent' }}>
-          <blockquote className="quote-block">
+      <div style={{ background: `linear-gradient(to bottom, rgba(26,21,96,0.60) 0%, rgba(45,35,128,0.45) 50%, rgba(26,21,96,0.65) 100%), url('/photos/jimbo-1.jpeg') center 30% / cover no-repeat`, minHeight: '420px', display: 'flex', alignItems: 'center' }}>
+        <div className="section" style={{ background: 'transparent', padding: '80px 40px' }}>
+          <blockquote className="quote-block" style={{ maxWidth: '820px', fontSize: 'clamp(1.4rem, 2.5vw, 2.1rem)', lineHeight: 1.5 }}>
             &ldquo;Big problems are usually solved through small, disciplined redesigns. The work is not grand gestures &mdash; it is the quiet, rigorous rebuilding of the system underneath.&rdquo;
             <div className="quote-attr">&mdash; Jimbo Reverente, Co-Founder</div>
           </blockquote>

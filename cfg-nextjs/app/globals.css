@@ -262,6 +262,16 @@ body {
 .step-title { font-size: 12px; font-weight: 600; color: #fff; margin: 0 0 3px; }
 .step-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
 
+/* INTERVENTION PROGRAMME GRID */
+.prog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .prog-grid { grid-template-columns: 1fr; } }
+.prog-card { background: rgba(255,255,255,0.04); border-radius: 16px; padding: 32px 28px; }
+.prog-icon { font-size: 36px; margin-bottom: 16px; line-height: 1; }
+.prog-name { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.prog-name span { color: var(--cfg-gold); }
+.prog-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 16px; }
+.prog-desc { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.7; margin: 0; }
+
 /* ENGAGEMENT CARDS */
 .eng-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .eng-card { background: rgba(255,255,255,0.04); border: 1.5px solid rgba(212,160,23,0.22); border-radius: 16px; padding: 22px 24px; }

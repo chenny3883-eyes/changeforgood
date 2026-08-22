@@ -59,6 +59,43 @@ export default function ServicesPage() {
         </div>
       </div>
 
+      <div className="section">
+        <p className="slabel">Intervention programmes</p>
+        <h2 style={{ marginBottom: '8px' }}>Four programmes. One purpose.</h2>
+        <p style={{ color: 'rgba(255,255,255,0.60)', fontSize: '15px', marginBottom: '32px', lineHeight: '1.7' }}>Structured interventions designed to move organizations from where they are to where they need to be &mdash; for good.</p>
+        <div className="prog-grid">
+
+          <div className="prog-card" style={{ border: '1.5px solid rgba(0,180,255,0.22)', borderTop: '4px solid rgba(0,180,255,0.70)' }}>
+            <div className="prog-icon">⚡</div>
+            <div className="prog-name">Tech <span>For Good</span></div>
+            <div className="prog-tag" style={{ color: 'rgba(0,200,255,0.85)' }}>Technology Enablement</div>
+            <p className="prog-desc">Programs that amplify technology-enabled processes for companies and organizations &mdash; bridging the gap between digital potential and operational reality.</p>
+          </div>
+
+          <div className="prog-card" style={{ border: '1.5px solid rgba(80,200,120,0.22)', borderTop: '4px solid rgba(80,200,120,0.70)' }}>
+            <div className="prog-icon">🌱</div>
+            <div className="prog-name">Build <span>For Good</span></div>
+            <div className="prog-tag" style={{ color: 'rgba(80,210,120,0.85)' }}>Startups &amp; Social Enterprise</div>
+            <p className="prog-desc">Programs designed to support start-ups and social enterprises as they navigate their way to becoming a product or service built for social impact.</p>
+          </div>
+
+          <div className="prog-card" style={{ border: '1.5px solid rgba(212,160,23,0.28)', borderTop: '4px solid rgba(212,160,23,0.80)' }}>
+            <div className="prog-icon">🧭</div>
+            <div className="prog-name">Lead <span>For Good</span></div>
+            <div className="prog-tag" style={{ color: 'rgba(212,160,23,0.90)' }}>Leadership Development</div>
+            <p className="prog-desc">Programs designed to empower leaders in a technology-enabled environment &mdash; building the mindset, character, and capability to lead with clarity and courage.</p>
+          </div>
+
+          <div className="prog-card" style={{ border: '1.5px solid rgba(180,100,255,0.22)', borderTop: '4px solid rgba(160,80,255,0.70)' }}>
+            <div className="prog-icon">🚀</div>
+            <div className="prog-name">Innovate <span>For Good</span></div>
+            <div className="prog-tag" style={{ color: 'rgba(190,120,255,0.85)' }}>Innovation &amp; Transformation</div>
+            <p className="prog-desc">Programs designed for innovation, learning, and transformation of seasoned organizations to be future-ready and agile in a highly disruptive business and governance landscape.</p>
+          </div>
+
+        </div>
+      </div>
+
       <div className="section section-alt">
         <p className="slabel">How an engagement works</p>
         <div className="eng-cards">

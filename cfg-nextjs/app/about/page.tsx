@@ -244,6 +244,12 @@ export default function AboutPage() {
           </div>
 
         </div>
+
+        <div style={{ marginTop: '40px', textAlign: 'center' }}>
+          <a href="/contact" className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none' }}>
+            Book a discovery call with Chenny
+          </a>
+        </div>
       </div>
 
       {/* ── CO-FOUNDER SECTION ── */}
@@ -437,6 +443,12 @@ export default function AboutPage() {
             </div>
           </div>
 
+        </div>
+
+        <div style={{ marginTop: '40px', textAlign: 'center' }}>
+          <a href="/contact" className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none' }}>
+            Book a discovery call with Jimbo
+          </a>
         </div>
       </div>
 

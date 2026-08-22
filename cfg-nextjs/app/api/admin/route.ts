@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-const ADMIN_PASSWORD = 'cfg2026';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? 'cfg2026';
 
 function readCsv(filename: string) {
   const p = path.join(process.cwd(), 'data', filename);

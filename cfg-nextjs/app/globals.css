@@ -258,7 +258,7 @@ body {
 /* STEPS */
 .step-row { display: flex; align-items: flex-start; }
 .step-item { flex: 1; text-align: center; padding: 0 8px; }
-.step-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(212,160,23,0.20); color: var(--cfg-gold); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
+.step-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(212,160,23,0.20); color: var(--cfg-gold); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin: 0; flex-shrink: 0; }
 .step-title { font-size: 12px; font-weight: 600; color: #fff; margin: 0 0 3px; }
 .step-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
 

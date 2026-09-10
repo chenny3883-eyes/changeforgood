@@ -3,13 +3,19 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import ClarityDiagnostic from '@/components/ClarityDiagnostic';
+import InnovationDiagnostic from '@/components/InnovationDiagnostic';
+
+type View = 'main' | 'clarity' | 'innovation';
 
 export default function ResourcesPage() {
-  const [showDiagnostic, setShowDiagnostic] = useState(false);
+  const [view, setView] = useState<View>('main');
 
   return (
     <>
-      {!showDiagnostic ? (
+      {view === 'clarity' && <ClarityDiagnostic onBack={() => setView('main')} />}
+      {view === 'innovation' && <InnovationDiagnostic onBack={() => setView('main')} />}
+
+      {view === 'main' && (
         <div id="resources-main">
           <div className="hero">
             <p className="eyebrow">Insights and tools</p>
@@ -18,13 +24,27 @@ export default function ResourcesPage() {
           </div>
 
           <div className="section">
-            <div className="download-banner">
+            <p className="slabel">Free diagnostics</p>
+
+            <div className="download-banner" style={{ marginBottom: '16px' }}>
               <span className="dl-icon">&#11015;</span>
               <div>
-                <span className="tag-gold" style={{ display: 'inline-block', marginBottom: '8px' }}>Free assessment</span>
-                <div className="svc-title" style={{ marginTop: 0 }}>The Clarity-First Diagnostic &mdash; a self-assessment for leaders</div>
-                <div className="svc-desc">10 honest questions that reveal where your business strategy is strong, where it is fragile, and what to prioritize first. Get your personalised profile instantly.</div>
-                <button className="btn-gold btn-sm" onClick={() => setShowDiagnostic(true)}>
+                <span className="tag-gold" style={{ display: 'inline-block', marginBottom: '8px' }}>Leadership assessment</span>
+                <div className="svc-title" style={{ marginTop: 0 }}>The Clarity-First Diagnostic</div>
+                <div className="svc-desc">10 honest questions that reveal where your business strategy is strong, where it is fragile, and what to prioritize first. Get your personalised leadership profile instantly.</div>
+                <button className="btn-gold btn-sm" onClick={() => setView('clarity')}>
+                  Take the free diagnostic &rarr;
+                </button>
+              </div>
+            </div>
+
+            <div className="download-banner">
+              <span className="dl-icon">💡</span>
+              <div>
+                <span className="tag-gold" style={{ display: 'inline-block', marginBottom: '8px' }}>Innovation assessment</span>
+                <div className="svc-title" style={{ marginTop: 0 }}>The Innovation Readiness Diagnostic</div>
+                <div className="svc-desc">10 questions across leadership, people, culture, feasibility, and market-centredness — revealing how ready your organisation truly is to innovate. Get your organisation&rsquo;s innovation profile instantly.</div>
+                <button className="btn-gold btn-sm" onClick={() => setView('innovation')}>
                   Take the free diagnostic &rarr;
                 </button>
               </div>
@@ -77,8 +97,6 @@ export default function ResourcesPage() {
             <div className="trust-note">&#128274; No spam. Unsubscribe anytime. Your information is never shared.</div>
           </div>
         </div>
-      ) : (
-        <ClarityDiagnostic onBack={() => setShowDiagnostic(false)} />
       )}
     </>
   );

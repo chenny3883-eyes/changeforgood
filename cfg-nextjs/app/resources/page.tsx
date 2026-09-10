@@ -2,8 +2,29 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Script from 'next/script';
 import ClarityDiagnostic from '@/components/ClarityDiagnostic';
 import InnovationDiagnostic from '@/components/InnovationDiagnostic';
+
+const FAQ_ITEMS = [
+  { q: 'What does Change For Good Consulting do?', a: 'We are a strategy and leadership consulting firm based in the Philippines. We help organisations and leaders build clarity, align their teams, develop the capability to execute, and create the conditions for lasting change — through consulting engagements, executive coaching, and innovation programmes.' },
+  { q: 'Who do you typically work with?', a: 'We work with business owners, senior executives, government leaders, and social enterprise founders who are navigating growth, transformation, or complex organisational challenges. Our clients are people who take their work seriously and are willing to do the inner and outer work that real change requires.' },
+  { q: 'What is the Clarity-First Diagnostic?', a: 'The Clarity-First Diagnostic is a free 10-question self-assessment for leaders. It evaluates five dimensions of organisational health — strategic clarity, leadership alignment, people and culture, innovation, and execution — and delivers a personalised leadership profile with specific next steps. It takes about five minutes.' },
+  { q: 'What is the Innovation Readiness Diagnostic?', a: 'The Innovation Readiness Diagnostic is a free 10-question assessment that reveals how ready your organisation is to innovate. It evaluates innovation leadership, people and mindset, culture and environment, feasibility and capacity, and market-centredness — giving you an honest picture of where the gaps are and what to address first.' },
+  { q: 'How do I start an engagement with Change For Good Consulting?', a: 'The best starting point is a Discovery Call — a focused, no-pressure conversation about where you are, where you want to go, and whether we are the right fit to help you get there. You can book one through the Contact page or by emailing chenny@cfgconsultingph.com.' },
+  { q: 'Where are you based and do you work outside the Philippines?', a: 'Our office is at Unit 5401, Corporate Finance Plaza, Ortigas Center, Pasig City, Philippines. We work with clients across the Philippines and are open to engagements regionally and globally, depending on the nature of the work.' },
+  { q: 'What makes Change For Good Consulting different from other consulting firms?', a: 'We combine the human side of change — leadership development, culture, and coaching — with the structural side: systems design, strategy, and execution. Chenny brings the people and process lens; Jimbo brings the engineering and innovation lens. Together, we work on the whole system, not just the surface.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
 
 type View = 'main' | 'clarity' | 'innovation';
 
@@ -17,6 +38,7 @@ export default function ResourcesPage() {
 
       {view === 'main' && (
         <div id="resources-main">
+          <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
           <div className="hero">
             <p className="eyebrow">Insights and tools</p>
             <h1>Practical thinking for leaders who take growth seriously.</h1>
@@ -84,6 +106,21 @@ export default function ResourcesPage() {
                   <div className="art-meta">6 min read</div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div className="section">
+            <p className="slabel">Frequently asked questions</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {FAQ_ITEMS.map((item, i, arr) => (
+                <details key={i} style={{ borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: i === arr.length - 1 ? '1px solid rgba(255,255,255,0.08)' : 'none' }}>
+                  <summary style={{ padding: '18px 0', fontSize: '15px', fontWeight: 600, color: '#fff', cursor: 'pointer', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
+                    {item.q}
+                    <span style={{ color: 'var(--cfg-gold)', fontSize: '20px', flexShrink: 0, lineHeight: 1 }}>+</span>
+                  </summary>
+                  <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.75', margin: '0 0 18px', paddingRight: '24px' }}>{item.a}</p>
+                </details>
+              ))}
             </div>
           </div>
 

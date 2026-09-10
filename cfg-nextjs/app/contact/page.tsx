@@ -88,7 +88,12 @@ export default function ContactPage() {
               <p className="slabel" style={{ marginBottom: '12px' }}>Reach us directly</p>
               <div className="contact-info-row"><span className="contact-info-icon">&#9993;</span>chenny@cfgconsultingph.com</div>
               <div className="contact-info-row"><span className="contact-info-icon">&#128279;</span>linkedin.com/in/chenny-galano</div>
-              <div className="contact-info-row"><span className="contact-info-icon">&#128205;</span>Philippines &middot; working globally</div>
+              <div className="contact-info-row" style={{ alignItems: 'flex-start' }}>
+                <span className="contact-info-icon">&#128205;</span>
+                <a href="https://maps.google.com/?q=Unit+5401+Corporate+Finance+Plaza+Ruby+Topaz+Road+Ortigas+Center+Pasig+City+Philippines" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', lineHeight: '1.55' }}>
+                  Unit No. 5401, Corporate Finance Plaza,<br />Ruby &amp; Topaz Road, Ortigas Center,<br />Pasig City, Philippines
+                </a>
+              </div>
             </div>
             <div style={{ borderRadius: '10px', padding: '14px', background: 'rgba(212,160,23,0.08)', border: '0.5px solid rgba(212,160,23,0.25)' }}>
               <blockquote className="quote-block" style={{ fontSize: '13px', background: 'transparent', padding: 0, borderLeft: '3px solid var(--cfg-gold)' }}>
